@@ -115,8 +115,8 @@ class Diretorio {
     static private
     bool ComparacaoPorBytes(byte[] procurado, byte[] atual) {
         for (int i = 0; i < procurado.Length; i++) {
-            if (i  > Array.LastIndexOf(atual)) return false;
-            if (procurado[i] != atual[i])      return false;
+            if (i >= atual.Length)        return false;
+            if (procurado[i] != atual[i]) return false;
         }
         return true;
     } // ComparacaoPorBytes
