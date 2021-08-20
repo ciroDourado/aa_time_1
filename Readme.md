@@ -1,7 +1,9 @@
-## Universidade Estadual do Maranhão
-## Estrutura de Dados Avançados
-## Atividades Assíncronas do Time 1
-
+# Atividades Assíncronas do Time 1
+Universidade Estadual do Maranhão<br>
+Estrutura de Dados Avançados
+<br>
+<br>
+<br>
 **Alunos:**
 
 * Ciro Dourado
