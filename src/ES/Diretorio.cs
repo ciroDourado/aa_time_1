@@ -1,7 +1,8 @@
-using System;
-using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using Tabelas;
+using System;
 
 namespace ES {
 // classe Diretorio
@@ -30,14 +31,14 @@ class Diretorio {
 	// Autor: Jonas
     static public
     List<string> TodosOsArquivos(string caminho) {
-        List<string> caminho_arquivo = new List<string>();
-        var arquivos = Directory.GetFiles(caminho);
+        var listaDeArquivos = new List<string>();
+        var arquivos        = Directory.GetFiles(caminho);
         Array.Sort(arquivos);
 
         foreach (var arquivo in arquivos) {
-            caminho_arquivo.Add(arquivo);
+            listaDeArquivos.Add(arquivo);
         }
-        return caminho_arquivo;
+        return listaDeArquivos;
     } // Método TodosOsArquivos
 
 
@@ -90,17 +91,8 @@ class Diretorio {
     // Autor: Douglas Castro
 	static private
     bool SaoIguais(byte[] procurado, string atual){
-    	byte[] arquivoAtual = File.ReadAllBytes(atual);
-        return ComparacaoPorBytes(procurado, arquivoAtual);
-
-    	// A função tem por dever "pegar" o nome do arquivo que
-        // vai ser comparado com a array de bytes, onde tal array
-        // é a foto que está sendo procurada
-    	// enquanto que a string, que é o segundo parâmetro da
-        // função, corresponde a outra foto da pasta.
-    	// Para que se possa comparar, deve-se abrir o arquivo
-        // passado como bytes, e enviar para a outra função que
-        // compara byte a byte.
+    	var bytesAtual = File.ReadAllBytes(atual);
+        return ComparacaoPorBytes(procurado, bytesAtual);
     } // Método SaoIguais
 
 
@@ -120,6 +112,76 @@ class Diretorio {
         }
         return true;
     } // ComparacaoPorBytes
+
+
+	// método TempoLista
+	// recebe
+	// |> um array de bytes, representando todos do procurado
+	// |> uma lista de arquivos, que pode conter o procurado
+	// retorna
+	// |> as medidas de tempo
+	// Autor: ?
+    static public
+    List<TimeSpan> TempoLista(byte[] procurado, List<string> arquivos) {
+        var ultimo        = arquivos.Count - 1;
+        var cronometro    = Stopwatch.StartNew();
+        var temposMedidos = new List<TimeSpan>();
+
+        for (int n = 0; n < ultimo; n++) {
+            var nArquivos = arquivos.GetRange(0, n);
+            nArquivos.Add(arquivos[ultimo]);
+
+            cronometro.Restart();
+            Diretorio.ArquivoExiste(procurado, nArquivos);
+            temposMedidos.Add(cronometro.Elapsed);
+        }
+        return temposMedidos;
+    } // TempoLista
+
+
+	// método TempoTabela
+	// recebe
+	// |> um array de bytes, representando todos do procurado
+	// |> uma lista de arquivos, que pode conter o procurado
+	// retorna
+	// |> as medidas de tempo
+	// Autor: ?
+    static public
+    List<TimeSpan> TempoTabela<T>(byte[] procurado, List<string> arquivos)
+        where T: IHasher, new()
+    {
+        var ultimo        = arquivos.Count - 1;
+        var cronometro    = Stopwatch.StartNew();
+        var temposMedidos = new List<TimeSpan>();
+
+        for (int n = 0; n < ultimo; n++) {
+            var arquivosTabelados = CriarTabela<T>(arquivos, n);
+            arquivosTabelados.Adicionar(arquivos[ultimo]);
+
+            cronometro.Restart();
+            Diretorio.ArquivoExiste(procurado, arquivosTabelados);
+            temposMedidos.Add(cronometro.Elapsed);
+        }
+        return temposMedidos;
+    } // TempoTabela
+
+
+	// método CriarTabela
+	// recebe
+	// |> uma lista de arquivos, que serão transferidos para a tabela
+	// |> um inteiro n, que representa a quantidade de transferências
+	// retorna
+	// |> uma tabela hash com todos os arquivos indexados
+	// Autor: Ciro
+    static private
+    Tabela<T> CriarTabela<T>(List<string> arquivos, int n)
+        where T: IHasher, new()
+    {
+        var nArquivos         = arquivos.GetRange(0, n);
+        var arquivosTabelados = new Tabela<T>(nArquivos.Count + 1);
+        arquivosTabelados.Adicionar(nArquivos);
+        return arquivosTabelados;
+    } // CriarTabela
 
 } // class Diretorio
 } // namespace ES

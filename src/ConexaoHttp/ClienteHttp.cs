@@ -2,22 +2,22 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.IO;
 
-namespace ComunicacaoComServidor {
+namespace ConexaoHttp {
 
-    class ClienteWeb {
+    class ClienteHttp {
         private Url        url;
         private HttpClient client;
 
 		// este construtor cria uma
 		// instância vazia de seus atributos
-        public ClienteWeb() {
+        public ClienteHttp() {
             this.url    = new Url();
             this.client = new HttpClient();
         } // construtor padrão
 
 		// este construtor cria uma
 		// instância inicializada seus atributos
-        public ClienteWeb(Url url) {
+        public ClienteHttp(Url url) {
             this.url    = url;
             this.client = new HttpClient();
         } // construtor parametrizado
@@ -43,6 +43,6 @@ namespace ComunicacaoComServidor {
             return await _client.GetStringAsync(_fromUrl);
         } // RequestString
 
-    } // class ClienteWeb
+    } // class ClienteHttp
 
-} // namespace ComunicacaoComServidor
+} // namespace ConexaoHttp

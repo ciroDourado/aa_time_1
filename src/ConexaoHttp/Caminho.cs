@@ -1,4 +1,4 @@
-namespace ComunicacaoComServidor {
+namespace ConexaoHttp {
 
     class Caminho {
         private string caminho;
@@ -29,4 +29,4 @@ namespace ComunicacaoComServidor {
 
     } // class Caminho
 
-} // namespace ComunicacaoComServidor
+} // namespace ConexaoHttp

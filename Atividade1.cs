@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 
-using ComunicacaoComServidor;
+using ConexaoHttp;
 using Conversores;
 using Colecoes;
 using Models;
@@ -32,13 +32,13 @@ namespace aa_time_1 {
 
 
     private static
-    ClienteWeb InicializarClienteWeb() {
+    ClienteHttp InicializarClienteWeb() {
         var url = new Url(
             "http://api.portaldatransparencia.gov.br",
             "api-de-dados/coronavirus/transferencias"
         );
         var token   = "1f644e567ce13bd43ab08bb7871e7739";
-        var cliente = new ClienteWeb(url);
+        var cliente = new ClienteHttp(url);
 
         cliente.AdicionarNoHeader("Accept", "application/json");
         cliente.AdicionarNoHeader("chave-api-dados", token);
@@ -47,7 +47,7 @@ namespace aa_time_1 {
 
 
     private static async
-    Task<string> BaixarDados(ClienteWeb cliente, int quantidade) {
+    Task<string> BaixarDados(ClienteHttp cliente, int quantidade) {
         var transferencias = new Transferencias();
         var paginas        = Enumerable.Range(1, quantidade);
 

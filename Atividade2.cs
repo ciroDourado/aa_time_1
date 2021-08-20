@@ -35,7 +35,7 @@ namespace aa_time_1 {
         var resultadoLinear = Diretorio.FormatarCaminho(aoArquivo);
 
         if (Arquivo.NaoExiste(resultadoLinear)) {
-            var metodo    = new MetodoDeAnalise(Analise.TempoLista);
+            var metodo    = new MetodoDeAnalise(Diretorio.TempoLista);
             var resultado = IniciarAnalise(metodo);
             Salvar(resultado, resultadoLinear);
         }
@@ -48,7 +48,7 @@ namespace aa_time_1 {
         var resultadoHash  = Diretorio.FormatarCaminho(aoArquivo);
 
         if (Arquivo.NaoExiste(resultadoHash)) {
-            var metodo    = new MetodoDeAnalise(Analise.TempoTabela<Md5>);
+            var metodo    = new MetodoDeAnalise(Diretorio.TempoTabela<Md5>);
             var resultado = IniciarAnalise(metodo);
             Salvar(resultado, resultadoHash);
         }

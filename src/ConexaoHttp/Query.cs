@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using System;
 
-namespace ComunicacaoComServidor {
+namespace ConexaoHttp {
 
     class Query {
         private Stack<string> queries;
@@ -89,4 +89,4 @@ namespace ComunicacaoComServidor {
 
     } // class Query
 
-} // namespace ComunicacaoComServidor
+} // namespace ConexaoHttp

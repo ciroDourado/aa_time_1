@@ -1,4 +1,4 @@
-namespace ComunicacaoComServidor {
+namespace ConexaoHttp {
 
 	class Url {
 		private Dominio dominio;
@@ -77,4 +77,4 @@ namespace ComunicacaoComServidor {
 
 	} // class Url
 
-} // namespace ComunicacaoComServidor
+} // namespace ConexaoHttp
