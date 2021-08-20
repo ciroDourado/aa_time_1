@@ -1,90 +1,15 @@
 @page
 @model IndexModel
-@using System.IO;
-
 @{
-    ViewData["Title"] = "Home page";
-    // Projeto 1
-    // Cada variavel pega o json em forma de stream de dados
-    var PegarTempoBinaria = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasBinaria.json");
-    var PegarTempoBolha   = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasBolha.json");
-    var PegarTempoFiltro  = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasFiltro.json");
-    var PegarTempoLinear  = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasLinear.json");
-
-    // Cada variável pega o json em forma de string
-    var TempoBinaria = PegarTempoBinaria.ReadToEnd();
-    var TempoBolha   = PegarTempoBolha.ReadToEnd();
-    var TempoFiltro  = PegarTempoFiltro.ReadToEnd();
-    var TempoLinear  = PegarTempoLinear.ReadToEnd();
-
-    var PegarInstrucoesBinaria = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasBinaria.json");
-    var PegarInstrucoesBolha   = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasBolha.json");
-    var PegarInstrucoesFiltro  = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasFiltro.json");
-    var PegarInstrucoesLinear  = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasLinear.json");
-
-    // Cada variável pega o json em forma de string
-    var InstrucoesBinaria = PegarInstrucoesBinaria.ReadToEnd();
-    var InstrucoesBolha   = PegarInstrucoesBolha.ReadToEnd();
-    var InstrucoesFiltro  = PegarInstrucoesFiltro.ReadToEnd();
-    var InstrucoesLinear  = PegarInstrucoesLinear.ReadToEnd();
-
-    // Projeto 2
-    var PegarTempoHashMD5 = new StreamReader(@"Dados/Complexidade/Tempo/diretorioHashMd5.json");
-    var PegarTempoHashSqm = new StreamReader(@"Dados/Complexidade/Tempo/diretorioHashSqm.json");
-    var PegarTempoHashLinear = new StreamReader(@"Dados/Complexidade/Tempo/diretorioLinear.json");
-
-    var TempoHashMd5 = PegarTempoHashMD5.ReadToEnd();
-    var TempoHashSqm = PegarTempoHashSqm.ReadToEnd();
-    var TempoHashLinear = PegarTempoHashLinear.ReadToEnd();
+  ViewData["Title"] = "Início";
 }
 
-<script src="~/node_modules/chart.js/dist/chart.js"></script>
-
-<div class="text-center" style="width: 100%;height: 900px;">
-    <section id="mainAnalise"
-        style="
-            height: 1300px;
-            display: flex; flex-direction: column;
-            justify-content: center;
-            align-items: center;"
-    > <!-- section id="mainAnalise" -->
-        <div id="Titulo">Análise de Complexidade</div>
-
-        <div id="wrapperCanvasTempo" class="chart-wrapper"
-            style="height: 380px;"
-        > <!-- div id="wrapperCanvasTempo" -->
-            <canvas id="chartTempo" style="width: 600px;height: 360px;"></canvas>
-        </div>
-
-        <div id="wrapperCanvasInstrucoes" class="chart-wrapper"
-            style="height: 380px;"
-        > <!-- div id="wrapperCanvasInstrucoes" -->
-            <canvas id="chartInstrucoes" style="width: 600px;height: 360px;"></canvas>
-        </div>
-
-        <div id="Titulo" style="margin-top: 16px;">Hashing</div>
-
-        <div id="wrapperCanvasTempoHash" class="chart-wrapper"
-            style="height: 380px;"
-        > <!-- div id="wrapperCanvasInstrucoes" -->
-            <canvas id="chartTempoHash" style="width: 600px;height: 360px;"></canvas>
-        </div>
-    </section>
+<div class="text-center">
+    <h1 class="display-4">Time 1</h1>
+    <h2>Integrantes:</h2>
+    <h4>Ciro Dourado de Oliveira</h4>
+    <h4>Douglas</h4>
+    <h4>Gabriel Câncio</h4>
+    <h4>João Gabriel</h4>
+    <h4>Jonas Carvalho</h4>
 </div>
-
-<span id="tempo_binaria" hidden>@TempoBinaria</span>
-<span id="tempo_bolha"   hidden>@TempoBolha</span>
-<span id="tempo_filtro"  hidden>@TempoFiltro</span>
-<span id="tempo_linear"  hidden>@TempoLinear</span>
-
-<span id="instrucoes_binaria" hidden>@InstrucoesBinaria</span>
-<span id="instrucoes_bolha"   hidden>@InstrucoesBolha</span>
-<span id="instrucoes_filtro"  hidden>@InstrucoesFiltro</span>
-<span id="instrucoes_linear"  hidden>@InstrucoesLinear</span>
-
-<span id="tempo_hash_md5"       hidden>@TempoHashMd5</span>
-<span id="tempo_hash_sqm"       hidden>@TempoHashSqm</span>
-<span id="tempo_hash_linear"    hidden>@TempoHashLinear</span>
-
-<script src="~/js/funcoes.js"></script>
-<script src="~/js/site.js"></script>
