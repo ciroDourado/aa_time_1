@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System;
 using Tabelas;
 
-namespace Diretorios {
+namespace ES {
 
 class Analise {
 

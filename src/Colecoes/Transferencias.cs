@@ -4,7 +4,7 @@ using System;
 
 using Complexidade.Instrucoes;
 using Complexidade.Tempo;
-using ConversorJsonObjeto;
+using Conversores;
 using Models;
 
 namespace Colecoes {
@@ -71,7 +71,7 @@ namespace Colecoes {
 
 		// este metodo insere um valor no conjunto
         public void AdicionarVarias(string json) {
-            var transf = Conversor.JsonParaObjeto<List<Transferencia>>(json);
+            var transf = Json.Deserializar<List<Transferencia>>(json);
             this.transferencias.AddRange(transf.ToArray());
         } // metodo Adicionar
 

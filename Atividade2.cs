@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 
-using ManipulacaoDeArquivos;
-using ConversorJsonObjeto;
-using Diretorios;
+using Conversores;
 using Tabelas;
+using ES;
 
 namespace aa_time_1 {
     class Atividade2 {
@@ -60,7 +59,7 @@ namespace aa_time_1 {
     List<TimeSpan> IniciarAnalise(MetodoDeAnalise metodo) {
         string[] aoArquivo = {"images", "target.jpg"};
         var imagemBuscada  = Diretorio.FormatarCaminho(aoArquivo);
-        var bytesDaImagem  = File.ReadAllBytes(imagemBuscada);
+        var bytesDaImagem  = Arquivo.LerBytes(imagemBuscada);
 
         var arquivos = Diretorio.TodosOsArquivos("images");
         return metodo(bytesDaImagem, arquivos);
@@ -69,11 +68,10 @@ namespace aa_time_1 {
 
     private static
     void Salvar(object dados, string caminho) {
-        var resultados = new Arquivo();
-        var instrucoesJson = Conversor
-            .ObjetoParaJson(dados);
-        resultados.Set(instrucoesJson);
-        resultados.SalvarEm(caminho);
+        Arquivo.SalvarDadosEm(
+            Json.Serializar(dados),
+            caminho
+        );
     } // Salvar
 
 } // class Atividade2

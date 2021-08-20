@@ -4,10 +4,10 @@ using System.Linq;
 using System;
 
 using ComunicacaoComServidor;
-using ManipulacaoDeArquivos;
-using ConversorJsonObjeto;
+using Conversores;
 using Colecoes;
 using Models;
+using ES;
 
 namespace aa_time_1 {
     class Atividade1 {
@@ -22,12 +22,11 @@ namespace aa_time_1 {
     private static async
     Task VerificarDadosDaApi(string dados) {
         string caminho = $"Dados/API/{dados}.json";
-        var dadosBaixados = new Arquivo();
 
-        if (dadosBaixados.NaoExisteAinda(caminho)) {
+        if (Arquivo.NaoExiste(caminho)) {
             var cliente = InicializarClienteWeb();
-            dadosBaixados.Set(await BaixarDados(cliente));
-            dadosBaixados.SalvarEm(caminho);
+            var json    = await BaixarDados(cliente, 800);
+            Arquivo.SalvarDadosEm(json, caminho);
         }
     } // VerificarDadosDaApi
 
@@ -38,9 +37,9 @@ namespace aa_time_1 {
             "http://api.portaldatransparencia.gov.br",
             "api-de-dados/coronavirus/transferencias"
         );
-        var token = "1f644e567ce13bd43ab08bb7871e7739";
-
+        var token   = "1f644e567ce13bd43ab08bb7871e7739";
         var cliente = new ClienteWeb(url);
+
         cliente.AdicionarNoHeader("Accept", "application/json");
         cliente.AdicionarNoHeader("chave-api-dados", token);
         return cliente;
@@ -48,12 +47,11 @@ namespace aa_time_1 {
 
 
     private static async
-    Task<string> BaixarDados(ClienteWeb cliente) {
+    Task<string> BaixarDados(ClienteWeb cliente, int quantidade) {
         var transferencias = new Transferencias();
+        var paginas        = Enumerable.Range(1, quantidade);
 
-        var paginas = Enumerable.Range(1, 800);
-        foreach (int pagina in paginas) {
-            Console.WriteLine(pagina);
+        foreach (var pagina in paginas) {
             cliente
                 .Url()
                 .Queries()
@@ -61,21 +59,17 @@ namespace aa_time_1 {
             var transferenciasJson = await cliente.RequestString();
             transferencias.AdicionarVarias(transferenciasJson);
         }
-        return Conversor.ObjetoParaJson(transferencias.Get());
+        return Json.Serializar(transferencias.Get());
     } // BaixarDados
 
 
     private static
     void VerificarResultadosDaAnalise(string dados) {
-        var transferenciasJson = new Arquivo()
-            .LerTodosOsDadosDe($"Dados/API/{dados}.json")
-            .Get(); // como string
-        var transferenciaList = Conversor
-            .JsonParaObjeto<List<Transferencia>>(
-            transferenciasJson);
-        var colecao = new Transferencias(
-            transferenciaList);
+        var caminho        = $"Dados/API/{dados}.json";
+        var transferencias = Json.Deserializar<List<Transferencia>>
+            (Arquivo.LerDados(caminho));
 
+        var colecao = new Transferencias(transferencias);
         ResultadosInstrucoes(colecao, dados);
         ResultadosTempo(colecao, dados);
     } // VerificarDadosDaApi
@@ -83,50 +77,41 @@ namespace aa_time_1 {
 
     private static
     void ResultadosInstrucoes(Transferencias resultados, string dados) {
-        var arquivo = new Arquivo();
-        var instrucoes = $"Dados/Complexidade/Instrucoes/{dados}";
+        var pastas = $"Dados/Complexidade/Instrucoes/{dados}";
 
-        if (arquivo.NaoExisteAinda($"{instrucoes}Linear.json"))
-            Salvar(resultados.InstrucoesLinear("kekw"), $"{instrucoes}Linear.json");
-
-        if (arquivo.NaoExisteAinda($"{instrucoes}Filtro.json"))
-            Salvar(resultados.InstrucoesFiltro("kekw"), $"{instrucoes}Filtro.json");
-
-        if (arquivo.NaoExisteAinda($"{instrucoes}Bolha.json"))
-            Salvar(resultados.InstrucoesBolha(), $"{instrucoes}Bolha.json");
-
-        if (arquivo.NaoExisteAinda($"{instrucoes}Binaria.json"))
-            Salvar(resultados.InstrucoesBinaria("kekw"), $"{instrucoes}Binaria.json");
+        if (Arquivo.NaoExiste($"{pastas}Linear.json"))
+            Salvar(resultados.InstrucoesLinear("kekw"), $"{pastas}Linear.json");
+        if (Arquivo.NaoExiste($"{pastas}Filtro.json"))
+            Salvar(resultados.InstrucoesFiltro("kekw"), $"{pastas}Filtro.json");
+        if (Arquivo.NaoExiste($"{pastas}Bolha.json"))
+            Salvar(resultados.InstrucoesBolha(), $"{pastas}Bolha.json");
+        if (Arquivo.NaoExiste($"{pastas}Binaria.json"))
+            Salvar(resultados.InstrucoesBinaria("kekw"), $"{pastas}Binaria.json");
     } // VerificarResultadosInstrucoes
 
 
     private static
     void ResultadosTempo(Transferencias resultados, string dados) {
-        var arquivo = new Arquivo();
-        var tempo = $"Dados/Complexidade/Tempo/{dados}";
+        var pastas = $"Dados/Complexidade/Tempo/{dados}";
 
-        if (arquivo.NaoExisteAinda($"{tempo}Linear.json"))
-            Salvar(resultados.TempoLinear("kekw"), $"{tempo}Linear.json");
-
-        if (arquivo.NaoExisteAinda($"{tempo}Filtro.json"))
-            Salvar(resultados.TempoFiltro("kekw"), $"{tempo}Filtro.json");
-
-        if (arquivo.NaoExisteAinda($"{tempo}Bolha.json"))
-            Salvar(resultados.TempoBolha(), $"{tempo}Bolha.json");
-
-        if (arquivo.NaoExisteAinda($"{tempo}Binaria.json"))
-            Salvar(resultados.TempoBinaria("kekw"), $"{tempo}Binaria.json");
+        if (Arquivo.NaoExiste($"{pastas}Linear.json"))
+            Salvar(resultados.TempoLinear("kekw"), $"{pastas}Linear.json");
+        if (Arquivo.NaoExiste($"{pastas}Filtro.json"))
+            Salvar(resultados.TempoFiltro("kekw"), $"{pastas}Filtro.json");
+        if (Arquivo.NaoExiste($"{pastas}Bolha.json"))
+            Salvar(resultados.TempoBolha(), $"{pastas}Bolha.json");
+        if (Arquivo.NaoExiste($"{pastas}Binaria.json"))
+            Salvar(resultados.TempoBinaria("kekw"), $"{pastas}Binaria.json");
     } // VerificarResultadosInstrucoes
 
 
     private static
     void Salvar(object dados, string caminho) {
-        var resultados = new Arquivo();
-        var instrucoesJson = Conversor
-            .ObjetoParaJson(dados);
-        resultados.Set(instrucoesJson);
-        resultados.SalvarEm(caminho);
-    } // Verificar
+        Arquivo.SalvarDadosEm(
+            Json.Serializar(dados),
+            caminho
+        );
+    } // Salvar
 
 } // class Atividade1
 } // namespace aa_time_1

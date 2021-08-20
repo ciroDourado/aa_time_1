@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Tabelas;
 
-namespace Diretorios {
+namespace ES {
 // classe Diretorio
 // Todos os métodos desta classe são responsáveis em varrer um
 // diretório, pegando seus arquivos, ou buscar algum em específico
@@ -17,8 +17,8 @@ class Diretorio {
 	// |> um path numa string só
 	// Autor: Jonas
     static public
-    string FormatarCaminho(string[] arquivos) {
-		return Path.Combine(arquivos);
+    string FormatarCaminho(string[] pastasAteArquivo) {
+		return Path.Combine(pastasAteArquivo);
     } // Método FormatarCaminho
 
 
@@ -122,5 +122,4 @@ class Diretorio {
     } // ComparacaoPorBytes
 
 } // class Diretorio
-
-} // namespace Diretorios
+} // namespace ES
