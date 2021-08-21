@@ -20,7 +20,8 @@ namespace aa_time_1 {
         string  caminho =  Diretorio.FormatarCaminho(pastas);
 
         ResultadoBuscaLinear(caminho);
-        ResultadoBuscaPorHash(caminho);
+        ResultadoBuscaPorHashMd5(caminho);
+        ResultadoBuscaPorHashSqm(caminho);
     } // VerificarResultadosBusca
 
 
@@ -42,7 +43,7 @@ namespace aa_time_1 {
 
 
     private static
-    void ResultadoBuscaPorHash(string caminho) {
+    void ResultadoBuscaPorHashMd5(string caminho) {
         string[] aoArquivo = {caminho, "diretorioHashMd5.json"};
         var resultadoHash  = Diretorio.FormatarCaminho(aoArquivo);
 
@@ -51,7 +52,20 @@ namespace aa_time_1 {
             var resultado = IniciarAnalise(metodo);
             Salvar(resultado, resultadoHash);
         }
-    } // ResultadoBuscaPorHash
+    } // ResultadoBuscaPorHashMd5
+
+
+    private static
+    void ResultadoBuscaPorHashSqm(string caminho) {
+        string[] aoArquivo = {caminho, "diretorioHashSqm.json"};
+        var resultadoHash  = Diretorio.FormatarCaminho(aoArquivo);
+
+        if (Arquivo.NaoExiste(resultadoHash)) {
+            var metodo    = new MetodoDeAnalise(Diretorio.TempoTabela<Sqm>);
+            var resultado = IniciarAnalise(metodo);
+            Salvar(resultado, resultadoHash);
+        }
+    } // ResultadoBuscaPorHashSqm
 
 
     private static
