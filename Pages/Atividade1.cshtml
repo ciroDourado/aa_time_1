@@ -1,61 +1,33 @@
 @page
 @model Atividade1Model
-@using System.IO;
-
+@using aa_time_1.Pages
 @{
     ViewData["Title"] = "Atividade 1";
-    var PegarTempoBinaria = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasBinaria.json");
-    var PegarTempoBolha   = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasBolha.json");
-    var PegarTempoFiltro  = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasFiltro.json");
-    var PegarTempoLinear  = new StreamReader(@"Dados/Complexidade/Tempo/transferenciasLinear.json");
-
-    var TempoBinaria = PegarTempoBinaria.ReadToEnd();
-    var TempoBolha   = PegarTempoBolha.ReadToEnd();
-    var TempoFiltro  = PegarTempoFiltro.ReadToEnd();
-    var TempoLinear  = PegarTempoLinear.ReadToEnd();
-
-    var PegarInstrucoesBinaria = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasBinaria.json");
-    var PegarInstrucoesBolha   = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasBolha.json");
-    var PegarInstrucoesFiltro  = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasFiltro.json");
-    var PegarInstrucoesLinear  = new StreamReader(@"Dados/Complexidade/Instrucoes/transferenciasLinear.json");
-    
-    var InstrucoesBinaria = PegarInstrucoesBinaria.ReadToEnd();
-    var InstrucoesBolha   = PegarInstrucoesBolha.ReadToEnd();
-    var InstrucoesFiltro  = PegarInstrucoesFiltro.ReadToEnd();
-    var InstrucoesLinear  = PegarInstrucoesLinear.ReadToEnd();
 }
-
-<head>
-  <link rel="stylesheet" type="text/css" href="~/css/site.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.bundle.min.js"></script>
-</head>
-<script src="~/node_modules/chart.js/dist/chart.js"></script>
-
 
 <div class="text-center" id="containerPrincipal">
     <h1 class="display-4">Atividade 1</h1>
     <h3>Análise de Complexidade</h3>
 
     <section id="mainAnalise">
+
         <div id="wrapperCanvasTempo" class="chart-wrapper">
+            <span id="tempo_binaria" hidden>@Model.TempoBinaria</span>
+            <span id="tempo_bolha"   hidden>@Model.TempoBolha</span>
+            <span id="tempo_filtro"  hidden>@Model.TempoFiltro</span>
+            <span id="tempo_linear"  hidden>@Model.TempoLinear</span>
             <canvas id="chartTempo"></canvas>
         </div>
 
         <div id="wrapperCanvasInstrucoes" class="chart-wrapper">
+            <span id="instrucoes_binaria" hidden>@Model.InstrucoesBinaria</span>
+            <span id="instrucoes_bolha"   hidden>@Model.InstrucoesBolha</span>
+            <span id="instrucoes_filtro"  hidden>@Model.InstrucoesFiltro</span>
+            <span id="instrucoes_linear"  hidden>@Model.InstrucoesLinear</span>
             <canvas id="chartInstrucoes"></canvas>
         </div>
     </section>
 </div>
-
-<span id="tempo_binaria" hidden>@TempoBinaria</span>
-<span id="tempo_bolha"   hidden>@TempoBolha</span>
-<span id="tempo_filtro"  hidden>@TempoFiltro</span>
-<span id="tempo_linear"  hidden>@TempoLinear</span>
-
-<span id="instrucoes_binaria" hidden>@InstrucoesBinaria</span>
-<span id="instrucoes_bolha"   hidden>@InstrucoesBolha</span>
-<span id="instrucoes_filtro"  hidden>@InstrucoesFiltro</span>
-<span id="instrucoes_linear"  hidden>@InstrucoesLinear</span>
 
 <script src="~/js/funcoes.js"></script>
 <script src="~/js/atividade1.js"></script>

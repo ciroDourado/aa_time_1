@@ -1,40 +1,24 @@
 @page
 @model Atividade2Model
-@using System.IO;
-
+@using aa_time_1.Pages
 @{
     ViewData["Title"] = "Atividade 2";
-    // Projeto 2
-    var PegarTempoHashMD5 = new StreamReader(@"Dados/Complexidade/Tempo/diretorioHashMd5.json");
-    var PegarTempoHashSqm = new StreamReader(@"Dados/Complexidade/Tempo/diretorioHashSqm.json");
-    var PegarTempoHashLinear = new StreamReader(@"Dados/Complexidade/Tempo/diretorioLinear.json");
-
-    var TempoHashMd5 = PegarTempoHashMD5.ReadToEnd();
-    var TempoHashSqm = PegarTempoHashSqm.ReadToEnd();
-    var TempoHashLinear = PegarTempoHashLinear.ReadToEnd();
 }
-
-<head>
-  <link rel="stylesheet" type="text/css" href="~/css/site.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.bundle.min.js"></script>
-</head>
-<script src="~/node_modules/chart.js/dist/chart.js"></script>
-
 
 <div class="text-center" id="containerPrincipal">
     <h1 class="display-4">Atividade 2</h1>
     <h3>Hashing</h3>
 
     <section id="mainAnalise">
+
         <div id="wrapperCanvasTempoHash" class="chart-wrapper">
+            <span id="tempo_hash_md5"    hidden>@Model.TempoHashMd5</span>
+            <span id="tempo_hash_sqm"    hidden>@Model.TempoHashSqm</span>
+            <span id="tempo_hash_linear" hidden>@Model.TempoHashLinear</span>
             <canvas id="chartTempoHash"></canvas>
         </div>
     </section>
 </div>
-
-<span id="tempo_hash_md5"    hidden>@TempoHashMd5</span>
-<span id="tempo_hash_sqm"    hidden>@TempoHashSqm</span>
-<span id="tempo_hash_linear" hidden>@TempoHashLinear</span>
 
 <script src="~/js/funcoes.js"></script>
 <script src="~/js/atividade2.js"></script>
