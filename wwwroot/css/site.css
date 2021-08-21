@@ -58,3 +58,19 @@ ul#WebSiteLinks {
     align-content: center;
     align-items: center;
 }
+
+a.navbar-logo {
+    padding-left: 40px;
+}
+
+a.navbar-brand{
+    padding-right: 20px;
+}
+
+h1.display-4{
+    padding-top: 15px;
+}
+
+li.nav-item{
+    padding-right: 30px;
+}
