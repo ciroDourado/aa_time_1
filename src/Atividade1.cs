@@ -79,14 +79,22 @@ namespace aa_time_1 {
     void ResultadosInstrucoes(Transferencias resultados, string dados) {
         var pastas = $"Dados/Complexidade/Instrucoes/{dados}";
 
-        if (Arquivo.NaoExiste($"{pastas}Linear.json"))
+        if (Arquivo.NaoExiste($"{pastas}Linear.json")) {
+            Console.WriteLine("Log: medindo tempo de Busca Linear");
             Salvar(resultados.InstrucoesLinear("kekw"), $"{pastas}Linear.json");
-        if (Arquivo.NaoExiste($"{pastas}Filtro.json"))
+        }
+        if (Arquivo.NaoExiste($"{pastas}Filtro.json")) {
+            Console.WriteLine("Log: medindo tempo de Filtro");
             Salvar(resultados.InstrucoesFiltro("kekw"), $"{pastas}Filtro.json");
-        if (Arquivo.NaoExiste($"{pastas}Bolha.json"))
+        }
+        if (Arquivo.NaoExiste($"{pastas}Bolha.json")) {
+            Console.WriteLine("Log: medindo tempo de Ordenação Bolha");
             Salvar(resultados.InstrucoesBolha(), $"{pastas}Bolha.json");
-        if (Arquivo.NaoExiste($"{pastas}Binaria.json"))
+        }
+        if (Arquivo.NaoExiste($"{pastas}Binaria.json")) {
+            Console.WriteLine("Log: medindo tempo de Busca Binária");
             Salvar(resultados.InstrucoesBinaria("kekw"), $"{pastas}Binaria.json");
+        }
     } // VerificarResultadosInstrucoes
 
 
@@ -94,14 +102,22 @@ namespace aa_time_1 {
     void ResultadosTempo(Transferencias resultados, string dados) {
         var pastas = $"Dados/Complexidade/Tempo/{dados}";
 
-        if (Arquivo.NaoExiste($"{pastas}Linear.json"))
+        if (Arquivo.NaoExiste($"{pastas}Linear.json")) {
+            Console.WriteLine("Log: medindo tempo de Busca Linear");
             Salvar(resultados.TempoLinear("kekw"), $"{pastas}Linear.json");
-        if (Arquivo.NaoExiste($"{pastas}Filtro.json"))
+        }
+        if (Arquivo.NaoExiste($"{pastas}Filtro.json")) {
+            Console.WriteLine("Log: medindo tempo de Busca Linear");
             Salvar(resultados.TempoFiltro("kekw"), $"{pastas}Filtro.json");
-        if (Arquivo.NaoExiste($"{pastas}Bolha.json"))
+        }
+        if (Arquivo.NaoExiste($"{pastas}Bolha.json")) {
+            Console.WriteLine("Log: medindo tempo de Busca Linear");
             Salvar(resultados.TempoBolha(), $"{pastas}Bolha.json");
-        if (Arquivo.NaoExiste($"{pastas}Binaria.json"))
+        }
+        if (Arquivo.NaoExiste($"{pastas}Binaria.json")) {
+            Console.WriteLine("Log: medindo tempo de Busca Linear");
             Salvar(resultados.TempoBinaria("kekw"), $"{pastas}Binaria.json");
+        }
     } // VerificarResultadosInstrucoes
 
 

@@ -35,6 +35,7 @@ namespace aa_time_1 {
         var resultadoLinear = Diretorio.FormatarCaminho(aoArquivo);
 
         if (Arquivo.NaoExiste(resultadoLinear)) {
+            Console.WriteLine("Log: medindo tempo de Busca em Lista");
             var metodo    = new MetodoDeAnalise(Diretorio.TempoLista);
             var resultado = IniciarAnalise(metodo);
             Salvar(resultado, resultadoLinear);
@@ -48,6 +49,7 @@ namespace aa_time_1 {
         var resultadoHash  = Diretorio.FormatarCaminho(aoArquivo);
 
         if (Arquivo.NaoExiste(resultadoHash)) {
+            Console.WriteLine("Log: medindo tempo de Busca em MD5");
             var metodo    = new MetodoDeAnalise(Diretorio.TempoTabela<Md5>);
             var resultado = IniciarAnalise(metodo);
             Salvar(resultado, resultadoHash);
@@ -61,6 +63,7 @@ namespace aa_time_1 {
         var resultadoHash  = Diretorio.FormatarCaminho(aoArquivo);
 
         if (Arquivo.NaoExiste(resultadoHash)) {
+            Console.WriteLine("Log: medindo tempo de Busca em SQM");
             var metodo    = new MetodoDeAnalise(Diretorio.TempoTabela<Sqm>);
             var resultado = IniciarAnalise(metodo);
             Salvar(resultado, resultadoHash);
