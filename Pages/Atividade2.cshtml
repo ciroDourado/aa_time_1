@@ -23,6 +23,23 @@
             <span id="tempo_hash_linear" hidden>@Model.TempoHashLinear</span>
             <canvas id="chartTempoHash"></canvas>
         </div>
+        <strong><h2>Análise dos Resultados:</h2></strong>
+        <p class='descricao'>Ao observar a linha traçada pelo gráfico da Busca Linear, observa-se que, à medida que o número de entradas
+            aumenta, o tempo de busca cresce proporcionalmente. Isso acontece pelo fato de que o algoritmo compara o elemento procurado com
+            cada elemento do vetor até encontra-lo. No caso do trabalho, encontra-se na última posição. Observa-se que, com um número pequeno de
+            entradas, a Busca Linear é mais eficiente que o Hash SQM. Porém, é bem menos eficiente comparado aos métodos de Hashing quando
+            se trata de um maior número de entradas. Em comparação com o Hashing MD5, a Busca Linear é menos eficiente tanto com um pequeno número
+            de entradas, quanto com um número mais elevado.
+        </p>
+
+        <p class='descricao'>Comparando os gráficos das funções de Hash MD5 e SQM observa-se picos maiores de tempo no gráfico SQM.
+            Seu maior tempo registado foi de 1.326.000 milisegundos. Enquanto no gráfico da função MD5 o maior tempo medido foi de 606.634
+            milisegundos. Em relação à oscilação dos gráficos, as funções apresentam variações entre tempos baixos
+            e tempos muito altos com números de entradas próximos uns aos outros. Isso pode ser explicado pelo acontecimento de colisões em ambos
+            os casos. A função MD5 configura-se como mais eficiente pelo fato de obter menos oscilações em seu gráfico e por demandar menos tempo 
+            para efetuar a busca.
+        
+        </p>
     </section>
 </div>
 
