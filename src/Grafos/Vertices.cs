@@ -127,4 +127,17 @@ class Vertices: IEnumerable, ICloneable {
         return copia;
     } // Clone from ICloneable
 
+
+    public string ToJson() {
+        var linhas = new List<string>();
+        int key    = 0;
+
+        foreach (var vertice in vertices) {
+            var linha = $"key: {key++}, nome: \"{vertice.Label()}\"";
+            linhas.Add($"    {{{linha}}}");
+        }
+        var json = string.Join(",\n", linhas);
+        return $"[\n{json}\n]";
+    } // ToJson
+
 } // class Vertices
