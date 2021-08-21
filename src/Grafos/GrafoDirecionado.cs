@@ -122,4 +122,9 @@ class GrafoDirecionado {
 		return vertices.NosIndices(indices);
 	} // ProcurarVizinhos
 
+
+	public string VerticesEmJson() {
+		return vertices.ToJson();
+	} // Vertices
+
 } // class GrafoDirecionado
