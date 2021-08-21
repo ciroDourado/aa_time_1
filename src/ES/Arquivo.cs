@@ -73,19 +73,34 @@ class Arquivo {
     } // LerDados
 
 
-    // método LerDados
+    // método LerBytes
 	// recebe
 	// |> uma string, que representa o caminho até o arquivo
 	// retorna
-    // |> string com dados: caso o arquivo exista
-    // |> string vazia    : caso o arquivo não exista
+    // |> array de bytes: caso o arquivo exista
+    // |> array vazio   : caso o arquivo não exista
 	// Autor: Ciro
     static public
     byte[] LerBytes(string caminho) {
         return Existe(caminho)?
             File.ReadAllBytes(caminho):
             new byte[0];
-    } // LerDados
+    } // LerBytes
+
+
+    // método LerLinhas
+	// recebe
+	// |> uma string, que representa o caminho até o arquivo
+	// retorna
+    // |> array de strings: caso o arquivo exista
+    // |> array vazio     : caso o arquivo não exista
+	// Autor: Ciro
+    static public
+    string[] LerLinhas(string caminho) {
+        return Existe(caminho)?
+            File.ReadAllLines(caminho):
+            new string[0];
+    } // LerLinhas
 
 } // class Arquivo
 } // namespace ES

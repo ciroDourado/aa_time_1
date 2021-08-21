@@ -26,17 +26,19 @@ class GrafoDirecionado {
 			AdicionarVertice(label);
 	} // AdicionarVertices
 
+	public void Adicionar(string[] labels) {
+		AdicionarVertices(labels);
+	} // Adicionar
+
 
 	public void AdicionarAresta(string saida, string entrada) {
 		if ( VerticesExistem(saida, entrada) )
 			_AdicionarAresta(saida, entrada);
 	} // AdicionarAresta
 
-
-	// public void AdicionarArestas(string[,] duplas) {
-	// 	foreach (var dupla in duplas)
-	// 		AdicionarAresta(dupla[0], dupla[1]);
-	// } // AdicionarArestas
+	public void Conectar(string saida, string entrada) {
+		AdicionarAresta(saida, entrada);
+	} // Conectar
 
 
 	private void _AdicionarAresta(string saida, string entrada) {
@@ -74,22 +76,6 @@ class GrafoDirecionado {
 		arestas.Exibir();
 		Console.WriteLine();
 	} // ExibirArestas
-
-
-	// DFS:
-	// |> é um algoritmo recursivo (mas pode ser iterativo tambem)
-	// |> caso seja iterativo, usa Pilha para percorrer o grafo
-	// |> visita os vértices pelas adjacencias
-	// |> o usuário ou o programa podem decidir o ponto inicial (é indiferente)
-	// |> o algoritmo percorre TODOS os vértices sempre, mesmo que não se liguem
-	// public Vertices DFS() {
-	// 	var naoVisitados = vertices.Clone();
-	//
-	// 	while (naoVisitados.NaoEstaVazio()) {
-	//
-	// 	}
-	// 	return new Vertices();
-	// } // DFS
 
 
 	// BFS:

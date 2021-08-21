@@ -1,0 +1,65 @@
+Chronos,Poseidon
+Chronos,Héstia
+Chronos,Hades
+Chronos,Deméter
+Chronos,Zeus
+Chronos,Hera
+Reia,Poseidon
+Reia,Héstia
+Reia,Hades
+Reia,Deméter
+Reia,Zeus
+Reia,Hera
+Deméter,Perséfone
+Hera,Hebe
+Hera,Hefesto
+Hera,Ares
+Hera,Ilítia
+Leda (rainha de Esparta),Dióscuros
+Leda (rainha de Esparta),Helena
+Sêmele,Dionísio
+Pluto,Tântalo (rei da Frígia)
+Dânae (mortal),Perseu
+Europa,Sarpedão (A Ilíada)
+Europa,Minos (rei de Creta)
+Europa,Radamanto (juiz dos mortos)
+Alcmena (mortal),Hércules
+Maia,Hermes
+Eurínome,Eufrosina
+Eurínome,Tália
+Eurínome,Aglaia
+Dione,Afrodite
+Témis,Horas (deusas das estações do ano)
+Témis,Moiras (deusas/irmãs do destino)
+Mnemósine,Musas (deusas da inspiração artística)
+Latona,Apolo
+Latona,Ártemis
+Apolo,Orfeu
+Clio,Orfeu
+Métis,Atena
+Zeus,Hebe
+Zeus,Hefesto
+Zeus,Ares
+Zeus,Ilítia
+Zeus,Dióscuros
+Zeus,Helena
+Zeus,Dionísio
+Zeus,Tântalo (rei da Frígia)
+Zeus,Perseu
+Zeus,Sarpedão (A Ilíada)
+Zeus,Minos (rei de Creta)
+Zeus,Radamanto (juiz dos mortos)
+Zeus,Hermes
+Zeus,Hércules
+Zeus,Eufrosina
+Zeus,Tália
+Zeus,Aglaia
+Zeus,Afrodite
+Zeus,Horas (deusas das estações do ano)
+Zeus,Moiras (deusas/irmãs do destino)
+Zeus,Musas (deusas da inspiração artística)
+Zeus,Apolo
+Zeus,Ártemis
+Zeus,Atena
+Zeus,Perséfone
+Hermes,Pã (sátiro)
