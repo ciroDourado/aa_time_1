@@ -7,7 +7,7 @@ using Complexidade.Tempo;
 using Conversores;
 using Models;
 
-namespace Colecoes {
+namespace ColecoesApi {
 
     class Transferencias:
         IAlgoritmos<Transferencias, Transferencia>,
@@ -325,4 +325,4 @@ namespace Colecoes {
 
     } // class Transferencias
 
-} // namespace Colecoes
+} // namespace ColecoesApi

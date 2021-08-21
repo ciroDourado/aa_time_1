@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 
+using ColecoesApi;
 using ConexaoHttp;
 using Conversores;
-using Colecoes;
 using Models;
 using ES;
 

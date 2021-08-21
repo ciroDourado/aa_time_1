@@ -1,6 +1,6 @@
 using System;
 
-namespace Colecoes {
+namespace ColecoesApi {
 
     public interface IAlgoritmos<Colecao, Elemento> {
 
@@ -11,4 +11,4 @@ namespace Colecoes {
 
     } // interface IAlgoritmos
 
-} // namespace Colecoes
+} // namespace ColecoesApi
