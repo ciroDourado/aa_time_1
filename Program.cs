@@ -13,7 +13,8 @@ namespace aa_time_1 {
 
         public static async
         Task Main(string[] args) {
-            await Atividade1.Executar();
+            await
+            Atividade1.Executar();
             Atividade2.Executar();
 
             CreateHostBuilder(args).Build().Run();
