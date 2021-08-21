@@ -120,7 +120,7 @@ class Diretorio {
 	// |> uma lista de arquivos, que pode conter o procurado
 	// retorna
 	// |> as medidas de tempo
-	// Autor: ?
+	// Autor: Douglas Castro
     static public
     List<TimeSpan> TempoLista(byte[] procurado, List<string> arquivos) {
         var ultimo        = arquivos.Count - 1;
@@ -145,7 +145,7 @@ class Diretorio {
 	// |> uma lista de arquivos, que pode conter o procurado
 	// retorna
 	// |> as medidas de tempo
-	// Autor: ?
+	// Autor: Douglas Castro
     static public
     List<TimeSpan> TempoTabela<T>(byte[] procurado, List<string> arquivos)
         where T: IHasher, new()
