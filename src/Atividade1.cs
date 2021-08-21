@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+contando instruçõesusing System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
@@ -80,19 +80,19 @@ namespace aa_time_1 {
         var pastas = $"Dados/Complexidade/Instrucoes/{dados}";
 
         if (Arquivo.NaoExiste($"{pastas}Linear.json")) {
-            Console.WriteLine("Log: medindo tempo de Busca Linear");
+            Console.WriteLine("Log: contando instruções de Busca Linear");
             Salvar(resultados.InstrucoesLinear("kekw"), $"{pastas}Linear.json");
         }
         if (Arquivo.NaoExiste($"{pastas}Filtro.json")) {
-            Console.WriteLine("Log: medindo tempo de Filtro");
+            Console.WriteLine("Log: contando instruções de Filtro");
             Salvar(resultados.InstrucoesFiltro("kekw"), $"{pastas}Filtro.json");
         }
         if (Arquivo.NaoExiste($"{pastas}Bolha.json")) {
-            Console.WriteLine("Log: medindo tempo de Ordenação Bolha");
+            Console.WriteLine("Log: contando instruções de Ordenação Bolha");
             Salvar(resultados.InstrucoesBolha(), $"{pastas}Bolha.json");
         }
         if (Arquivo.NaoExiste($"{pastas}Binaria.json")) {
-            Console.WriteLine("Log: medindo tempo de Busca Binária");
+            Console.WriteLine("Log: contando instruções de Busca Binária");
             Salvar(resultados.InstrucoesBinaria("kekw"), $"{pastas}Binaria.json");
         }
     } // VerificarResultadosInstrucoes
@@ -107,15 +107,15 @@ namespace aa_time_1 {
             Salvar(resultados.TempoLinear("kekw"), $"{pastas}Linear.json");
         }
         if (Arquivo.NaoExiste($"{pastas}Filtro.json")) {
-            Console.WriteLine("Log: medindo tempo de Busca Linear");
+            Console.WriteLine("Log: medindo tempo de Filtro");
             Salvar(resultados.TempoFiltro("kekw"), $"{pastas}Filtro.json");
         }
         if (Arquivo.NaoExiste($"{pastas}Bolha.json")) {
-            Console.WriteLine("Log: medindo tempo de Busca Linear");
+            Console.WriteLine("Log: medindo tempo de Ordenação Bolha");
             Salvar(resultados.TempoBolha(), $"{pastas}Bolha.json");
         }
         if (Arquivo.NaoExiste($"{pastas}Binaria.json")) {
-            Console.WriteLine("Log: medindo tempo de Busca Linear");
+            Console.WriteLine("Log: medindo tempo de Busca Binária");
             Salvar(resultados.TempoBinaria("kekw"), $"{pastas}Binaria.json");
         }
     } // VerificarResultadosInstrucoes
