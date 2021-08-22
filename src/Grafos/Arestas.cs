@@ -72,14 +72,14 @@ class Arestas {
         for (int saida = 0; saida < adjacencias.Dimensao(); saida++) {
 			for (int entrada = 0; entrada < adjacencias.Dimensao(); entrada++) {
 				if (ExisteEntre(saida, entrada)) {
-					var linha = $"from: {saida}, to: {entrada}";
-					linhas.Add($"    {{{linha}}}");
+					var linha = $"\"from\": {saida}, \"to\": {entrada}";
+					linhas.Add($"\t\t{{{linha}}}");
 				}
 			} // for entrada
         } // for saida
-		
+
         var json = string.Join(",\n", linhas);
-        return $"[\n{json}\n]";
+        return $"{{\n\t\"linkDataArray\": [\n{json}\n\t]\n}}";
     } // ToJson
 
 } // class Arestas

@@ -134,11 +134,11 @@ class Vertices: IEnumerable, ICloneable {
         int key    = 0;
 
         foreach (var vertice in vertices) {
-            var linha = $"key: {key++}, nome: \"{vertice.Label()}\"";
-            linhas.Add($"    {{{linha}}}");
+            var linha = $"\"key\": {key++}, \"nome\": \"{vertice.Label()}\"";
+            linhas.Add($"\t\t{{{linha}}}");
         }
         var json = string.Join(",\n", linhas);
-        return $"[\n{json}\n]";
+        return $"{{\n\t\"nodeDataArray\": [\n{json}\n\t]\n}}";
     } // ToJson
 
 } // class Vertices
