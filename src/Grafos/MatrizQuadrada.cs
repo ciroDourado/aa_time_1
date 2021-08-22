@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 
+namespace Grafos {
 class MatrizQuadrada<T> {
     private T[,] elementos;
     private int  dimensao;
@@ -97,7 +98,7 @@ class MatrizQuadrada<T> {
 
     public List<int> FiltrarLinha(int x, T valor) {
         var indices = new List<int>();
-        
+
         var linha   = Linha(x);
         for (int i = 0; i < dimensao; i++)
             if (linha[i].Equals(valor)) indices.Add(i);
@@ -106,3 +107,4 @@ class MatrizQuadrada<T> {
 
 
 } // class MatrizQuadrada<T>
+} // namespace Grafos

@@ -1,5 +1,6 @@
 using System;
 
+namespace Grafos {
 class GrafoDirecionado {
 	private Vertices vertices;
 	private Arestas  arestas;
@@ -128,3 +129,4 @@ class GrafoDirecionado {
 	} // Vertices
 
 } // class GrafoDirecionado
+} // namespace Grafos

@@ -1,3 +1,4 @@
+namespace Grafos {
 class Vertice {
     private string label;
 
@@ -21,3 +22,4 @@ class Vertice {
         return $"{label}";
     } // ToString
 } // class Vertice
+} // namespace Grafos

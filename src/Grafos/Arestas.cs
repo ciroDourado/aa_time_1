@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+namespace Grafos {
 class Arestas {
 	private MatrizQuadrada<bool> adjacencias;
 	private int                  quantidade;
@@ -65,3 +66,4 @@ class Arestas {
 	} // QuePartemDe
 
 } // class Arestas
+} // namespace Grafos

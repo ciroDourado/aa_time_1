@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
+namespace Grafos {
 class Vertices: IEnumerable, ICloneable {
     private Queue<Vertice> vertices;
     private int            quantidade;
@@ -141,3 +142,4 @@ class Vertices: IEnumerable, ICloneable {
     } // ToJson
 
 } // class Vertices
+} // namespace Grafos

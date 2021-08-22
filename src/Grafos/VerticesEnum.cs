@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
+namespace Grafos {
 class VerticesEnum: IEnumerator {
     public Queue<Vertice> vertices;
     int position = -1;
@@ -34,3 +35,4 @@ class VerticesEnum: IEnumerator {
     } // Current
 
 } // class VerticesEnum
+} // namespace Grafos
