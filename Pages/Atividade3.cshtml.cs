@@ -41,7 +41,6 @@ public class Atividade3Model: PageModel {
             var filho = grau[1];
             genealogia.Conectar(pai, filho);
         }
-
         VerticesJson = genealogia.VerticesEmJson();
         ArestasJson  = genealogia.ArestasEmJson();
     }
