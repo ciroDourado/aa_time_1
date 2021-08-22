@@ -126,7 +126,12 @@ class GrafoDirecionado {
 
 	public string VerticesEmJson() {
 		return vertices.ToJson();
-	} // Vertices
+	} // VerticesEmJson
+
+
+	public string ArestasEmJson() {
+		return arestas.ToJson();
+	} // ArestasEmJson
 
 } // class GrafoDirecionado
 } // namespace Grafos
