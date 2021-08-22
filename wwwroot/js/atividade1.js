@@ -1,10 +1,10 @@
 indiceInicial = 3;
 elementos = 999;
 
-instrucoesLinear  = JSON.parse(document.querySelector("#instrucoes_linear").innerText);
-instrucoesFiltro  = JSON.parse(document.querySelector("#instrucoes_filtro").innerText);
-instrucoesBolha   = JSON.parse(document.querySelector("#instrucoes_bolha").innerText);
-instrucoesBinaria = JSON.parse(document.querySelector("#instrucoes_binaria").innerText);
+instrucoesLinear  = JSON.parse(document.querySelector("span#instrucoes_linear").innerText);
+instrucoesFiltro  = JSON.parse(document.querySelector("span#instrucoes_filtro").innerText);
+instrucoesBolha   = JSON.parse(document.querySelector("span#instrucoes_bolha").innerText);
+instrucoesBinaria = JSON.parse(document.querySelector("span#instrucoes_binaria").innerText);
 
 instrucoesLinearDataset  = gerarDataset("Linear",  instrucoesLinear.slice(indiceInicial, elementos));
 instrucoesFiltroDataset  = gerarDataset("Filtro",  instrucoesFiltro.slice(indiceInicial, elementos));
@@ -22,10 +22,10 @@ canvasInstrucoes = document.getElementById("chartInstrucoes").getContext("2d");
 
 
 
-tempoLinear  = JSON.parse(document.querySelector("#tempo_linear").innerText);
-tempoFiltro  = JSON.parse(document.querySelector("#tempo_filtro").innerText);
-tempoBolha   = JSON.parse(document.querySelector("#tempo_bolha").innerText);
-tempoBinaria = JSON.parse(document.querySelector("#tempo_binaria").innerText);
+tempoLinear  = JSON.parse(document.querySelector("span#tempo_linear").innerText);
+tempoFiltro  = JSON.parse(document.querySelector("span#tempo_filtro").innerText);
+tempoBolha   = JSON.parse(document.querySelector("span#tempo_bolha").innerText);
+tempoBinaria = JSON.parse(document.querySelector("span#tempo_binaria").innerText);
 
 tempoLinearDataset  = gerarDataset("Linear",  tempoLinear.slice(indiceInicial, elementos));
 tempoFiltroDataset  = gerarDataset("Filtro",  tempoFiltro.slice(indiceInicial, elementos));

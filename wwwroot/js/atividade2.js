@@ -1,6 +1,6 @@
-tempoHashMd5    = JSON.parse(document.querySelector("#tempo_hash_md5").innerText);
-tempoHashSqm    = JSON.parse(document.querySelector("#tempo_hash_sqm").innerText);
-tempoHashLinear = JSON.parse(document.querySelector("#tempo_hash_linear").innerText);
+tempoHashMd5    = JSON.parse(document.querySelector("span#tempo_hash_md5").innerText);
+tempoHashSqm    = JSON.parse(document.querySelector("span#tempo_hash_sqm").innerText);
+tempoHashLinear = JSON.parse(document.querySelector("span#tempo_hash_linear").innerText);
 
 tempoHashMd5Dataset    = gerarDataset("MD5",  tempoHashMd5);
 tempoHashSqmDataset    = gerarDataset("SQM",  tempoHashSqm);
