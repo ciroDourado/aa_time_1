@@ -67,7 +67,50 @@ public class Atividade3Model: PageModel {
     } // AdicionarRelacoesConjugais
 
     public void OnGet() {
-        json = genealogia.EmJson();
-    }
+        json   = GrafoEmJson();
+        Console.WriteLine(json);
+    } // OnGet
+
+	public string GrafoEmJson() {
+		var linhas = new List<string>();
+
+		foreach (var dupla in genealogia.Enumerar()) {
+			var linha = LinhaJson(dupla.index, dupla.vertice);
+			linhas.Add(linha);
+		}
+		return $"[\n{string.Join(",\n", linhas)}\n]";
+	} // GrafoEmJson
+
+	private string LinhaJson(int key, Vertice vertice) {
+		var linha = new List<string>();
+
+		linha.Add($"key: {key}");
+		linha.Add($"n: \"{vertice.Label()}\"");
+
+		if (vertice.EhMulher()) {
+			var vinculo = Familiar.Conjugalidade;
+			var marido  = genealogia.ArestasQueChegamEm(key, vinculo);
+			if (marido.Count != 0)
+				linha.Add($"vir: {marido[0]}");
+		}
+
+		var pais = genealogia.ArestasQueChegamEm(
+			key,
+			Familiar.Hereditariedade
+		); // QueChegamEm
+
+		if (pais.Count > 1) {
+			if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
+				linha.Add($"f: {pais[0]}, m: {pais[1]}");
+			else linha.Add($"f: {pais[1]}, m: {pais[0]}");
+		}
+		else if (pais.Count == 1) {
+			if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
+				linha.Add($"f: {pais[0]}");
+			else linha.Add($"m: {pais[0]}");
+		}
+		return $"\t{{{string.Join(", ", linha)}}}";
+	} // LinhaJson
+
 } // public class Atividade3Model: PageModel
 } // namespace aa_time_1.Pages

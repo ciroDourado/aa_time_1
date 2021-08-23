@@ -156,46 +156,19 @@ class GrafoDirecionado {
 	} // ProcurarVizinhos
 
 
-	public string EmJson() {
-		var linhas = new List<string>();
+    public List<(int index, Vertice vertice)> Enumerar() {
+        return vertices.Enumerar();
+    } // Enumerar
 
-		foreach (var dupla in vertices.Enumerar()) {
-			var linha = LinhaJson(dupla.index, dupla.vertice);
-			linhas.Add(linha);
-		}
-		return $"[\n{string.Join(",\n", linhas)}\n]";
-	} // EmJson
 
-	private string LinhaJson(int key, Vertice vertice) {
-		var linha = new List<string>();
+	public Vertice VerticeNoIndice(int indice) {
+		return vertices.NoIndice(indice);
+	} // VerticeNoIndice
 
-		linha.Add($"key: {key}");
-		linha.Add($"n: \"{vertice.Label()}\"");
 
-		if (vertice.EhMulher()) {
-			var vinculo = Familiar.Conjugalidade;
-			var marido  = arestas.QueChegamEm(key, vinculo);
-			if (marido.Count != 0)
-				linha.Add($"vir: {marido[0]}");
-		}
-
-		var pais = arestas.QueChegamEm(
-			key,
-			Familiar.Hereditariedade
-		); // QueChegamEm
-
-		if (pais.Count > 1) {
-			if (vertices.NoIndice(pais[0]).EhHomem())
-				linha.Add($"f: {pais[0]}, m: {pais[1]}");
-			else linha.Add($"f: {pais[1]}, m: {pais[0]}");
-		}
-		else if (pais.Count == 1) {
-			if (vertices.NoIndice(pais[0]).EhHomem())
-				linha.Add($"f: {pais[0]}");
-			else linha.Add($"m: {pais[0]}");
-		}
-		return $"\t{{{string.Join(", ", linha)}}}";
-	} // LinhaJson
+	public List<int> ArestasQueChegamEm(int entrada, Familiar vinculo) {
+		return arestas.QueChegamEm(entrada, vinculo);
+	} // ArestasQueChegamEm
 
 } // class GrafoDirecionado
 } // namespace Grafos
