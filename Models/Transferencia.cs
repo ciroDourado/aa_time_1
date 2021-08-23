@@ -1,6 +1,5 @@
 namespace Models {
-
-    class Transferencia: IFormatacaoModel {
+    class Transferencia {
         public string acao                             { get; set; }
         public string codigoAcao                       { get; set; }
         public string codigoElementoDespesa            { get; set; }
@@ -23,12 +22,10 @@ namespace Models {
         public string valor                            { get; set; }
 
 
-        // implementacao de Formatar de IFormatacao
-        public string Formatar() {
+        public override string ToString() {
             var dado1 = $"Código do favorecido: {codigoFavorecido}";
             var dado2 = $"Função da transferência: {funcao}";
             return $"{dado1}\n{dado2}";
-        } // metodo Formatar
+        } // metodo ToString
     } // class Transferencia
-
 } // namespace models
