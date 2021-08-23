@@ -10,7 +10,7 @@ Zeus,Alcmena (mortal)
 Zeus,Maia
 Zeus,Europa
 Zeus,Dânae (mortal)
-Zeus,Pluto
+Zeus,Plota
 Zeus,Sêmele
 Zeus,Leda (rainha de Esparta)
 Zeus,Hera
