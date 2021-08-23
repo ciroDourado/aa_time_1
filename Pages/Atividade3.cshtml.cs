@@ -7,6 +7,8 @@ using System.Linq;
 using System.IO;
 using System;
 
+using Conversores;
+using Models;
 using Grafos;
 using ES;
 
@@ -73,64 +75,66 @@ public class Atividade3Model: PageModel {
 
 
 	public string GrafoEmJson() {
-		var linhas = new List<string>();
+		var nos = new List<NoGenograma>();
 
-		foreach (var dupla in genealogia.Enumerar()) {
-			var linha = LinhaJson(dupla.index, dupla.vertice);
-			linhas.Add(linha);
+		foreach (var tuple in genealogia.Enumerar()) {
+			var no = InicializarNo(tuple.index, tuple.vertice);
+			nos.Add(no);
 		}
-		return $"[\n{string.Join(",\n", linhas)}\n]";
+		return Json.Serializar(nos);
 	} // GrafoEmJson
 
 
-	private string LinhaJson(int key, Vertice vertice) {
-		var linha = new List<string>();
+	private NoGenograma InicializarNo(int key, Vertice vertice) {
+		var no = new NoGenograma();
 
-        AdicionarKey(linha, key);
-        AdicionarNome(linha, vertice.Label());
-        AdicionarConjuges(linha, key);
-        AdicionarPais(linha, key);
+        no.key = key;
+        no.n   = vertice.Label();
+        no.s   = vertice.Sexo();
+        AdicionarConjuges(no);
+        AdicionarPais(no);
 
-		return $"\t{{{string.Join(", ", linha)}}}";
-	} // LinhaJson
-
-
-    private void AdicionarKey(List<string> linha, int key) {
-        linha.Add($"key: {key}");
-    } // AdicionarKey
+		return no;
+	} // InicializarNo
 
 
-    private void AdicionarNome(List<string> linha, string n) {
-        linha.Add($"n: \"{n}\"");
-    } // AdicionarNome
-
-
-    private void AdicionarConjuges(List<string> linha, int key) {
-        if (genealogia.VerticeNoIndice(key).EhMulher()) {
+    private void AdicionarConjuges(NoGenograma no) {
+        int indice = no.key ?? 0;
+        if (genealogia.VerticeNoIndice(indice).EhMulher()) {
             var vinculo = Familiar.Conjugalidade;
-            var marido  = genealogia.ArestasQueChegamEm(key, vinculo);
-            if (marido.Count != 0)
-                linha.Add($"vir: {marido[0]}");
+            var marido  = genealogia.ArestasQueChegamEm(indice, vinculo);
+            if (marido.Count != 0) no.vir = marido[0];
         }
     } // AdicionarConjuges
 
 
-    private void AdicionarPais(List<string> linha, int key) {
+    private void AdicionarPais(NoGenograma no) {
+        int indice = no.key ?? 0;
         var pais = genealogia.ArestasQueChegamEm(
-            key,
+            indice,
             Familiar.Hereditariedade
         );
-        if (pais.Count > 1) {
-            if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
-                linha.Add($"f: {pais[0]}, m: {pais[1]}");
-            else linha.Add($"f: {pais[1]}, m: {pais[0]}");
-        }
-        else if (pais.Count == 1) {
-            if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
-                linha.Add($"f: {pais[0]}");
-            else linha.Add($"m: {pais[0]}");
-        }
+        if      (pais.Count >  1) AdicionarAmbosOsPais(no, pais);
+        else if (pais.Count == 1) AdicionarPaiOuMae(no, pais);
     } // AdicionarPais
+
+
+    private void AdicionarAmbosOsPais(NoGenograma no, List<int> pais) {
+        if (genealogia.VerticeNoIndice(pais[0]).EhHomem()) {
+            no.f = pais[0];
+            no.m = pais[1];
+        } else {
+            no.f = pais[1];
+            no.m = pais[0];
+        }
+    } // AdicionarAmbosOsPais
+
+
+    private void AdicionarPaiOuMae(NoGenograma no, List<int> pais) {
+        if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
+            no.f  = pais[0];
+        else no.m = pais[0];
+    } // AdicionarAmbosOsPais
 
 } // public class Atividade3Model: PageModel
 } // namespace aa_time_1.Pages
