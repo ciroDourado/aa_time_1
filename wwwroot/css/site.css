@@ -5,8 +5,17 @@
     border: 0;
     box-sizing: border-box;
 
-    font-family:'Roboto', sans-serif;
+    font-family:'Source Code Pro', monospace;
 }
+
+@font-face {
+    font-family: 'RedHat';
+    src: url('RedHat.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
 
 body, input, button {
     font-family:'Roboto', sans-serif;
@@ -73,4 +82,16 @@ h1.display-4{
 
 li.nav-item{
     padding-right: 30px;
+}
+
+a.nav-link.text-light{
+    font-family: 'Source Code Pro', monospace;
+    font-weight: normal;
+    font-style: normal;
+}
+
+a#LinkToHome.navbar-brand {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: normal;
+    font-style: normal;
 }
