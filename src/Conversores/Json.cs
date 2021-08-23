@@ -14,9 +14,14 @@ class Json {
 
     public static
     string Serializar(object objeto) {
+        var indentado         = Formatting.Indented;
+        var ignorarNull       = new JsonSerializerSettings {
+            NullValueHandling = NullValueHandling.Ignore
+        };
         return JsonConvert.SerializeObject(
             objeto,
-            Formatting.Indented
+            indentado,
+            ignorarNull
         );
     } // Serializar
 
