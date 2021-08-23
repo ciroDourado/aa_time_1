@@ -130,15 +130,16 @@ class Vertices: IEnumerable, ICloneable {
 
 
     public string ToJson() {
-        var linhas = new List<string>();
-        int key    = 0;
-
-        foreach (var vertice in vertices) {
-            var linha = $"\"key\": {key++}, \"nome\": \"{vertice.Label()}\"";
-            linhas.Add($"\t\t{{{linha}}}");
-        }
-        var json = string.Join(",\n", linhas);
-        return $"{{\n\t\"nodeDataArray\": [\n{json}\n\t]\n}}";
+        // var linhas = new List<string>();
+        // int key    = 0;
+        //
+        // foreach (var vertice in vertices) {
+        //     var linha = $"\"key\": {key++}, \"nome\": \"{vertice.Label()}\"";
+        //     linhas.Add($"\t\t{{{linha}}}");
+        // }
+        // var json = string.Join(",\n", linhas);
+        // return $"{{\n\t\"nodeDataArray\": [\n{json}\n\t]\n}}";
+		return string.Empty;
     } // ToJson
 
 } // class Vertices

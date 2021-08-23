@@ -1,0 +1,18 @@
+Chronos,Reia
+Zeus,Deméter
+Zeus,Métis
+Zeus,Latona
+Zeus,Mnemósine
+Zeus,Témis
+Zeus,Dione
+Zeus,Eurínome
+Zeus,Alcmena (mortal)
+Zeus,Maia
+Zeus,Europa
+Zeus,Dânae (mortal)
+Zeus,Pluto
+Zeus,Sêmele
+Zeus,Leda (rainha de Esparta)
+Zeus,Hera
+Apolo,Clio
+Orfeu,Eurídice

@@ -106,5 +106,30 @@ class MatrizQuadrada<T> {
     } // FiltrarLinha
 
 
+    public T[] Coluna(int x) {
+        return IndiceEhValido(x)?
+            CopiarColuna(x):
+            new T[0];
+    } // Coluna
+
+
+    private T[] CopiarColuna(int x) {
+        var coluna = new T[dimensao];
+        for (int i = 0; i < dimensao; i++)
+            coluna[i] = elementos[i, x];
+        return coluna;
+    } // CopiarColuna
+
+
+    public List<int> FiltrarColuna(int x, T valor) {
+        var indices = new List<int>();
+
+        var coluna  = Coluna(x);
+        for (int i = 0; i < dimensao; i++)
+            if (coluna[i].Equals(valor)) indices.Add(i);
+        return indices;
+    } // FiltrarColuna
+
+
 } // class MatrizQuadrada<T>
 } // namespace Grafos

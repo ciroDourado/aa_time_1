@@ -1,50 +1,50 @@
-Chronos
-Reia
-Poseidon
-Héstia
-Hades
-Deméter
-Zeus
-Hera
-Hebe
-Hefesto
-Ares
-Ilítia
-Perséfone
-Métis
-Atena
-Latona
-Apolo
-Ártemis
-Orfeu
-Mnemósine
-Musas (deusas da inspiração artística)
-Horas (deusas das estações do ano)
-Moiras (deusas/irmãs do destino)
-Afrodite
-Dione
-Témis
-Leda (rainha de Esparta)
-Dióscuros
-Helena
-Dionísio
-Sêmele
-Pluto
-Tântalo (rei da Frígia)
-Eurínome
-Eufrosina
-Tália
-Aglaia
-Alcmena (mortal)
-Hércules
-Maia
-Hermes
-Europa
-Sarpedão (A Ilíada)
-Minos (rei de Creta)
-Radamanto (juiz dos mortos)
-Perseu
-Dânae (mortal)
-Clio
-Pã (sátiro)
-Eurídice
+Chronos,M
+Reia,F
+Poseidon,M
+Héstia,F
+Hades,M
+Deméter,F
+Zeus,M
+Hera,F
+Hebe,F
+Hefesto,M
+Ares,M
+Ilítia,F
+Perséfone,F
+Métis,F
+Atena,F
+Latona,F
+Apolo,M
+Ártemis,F
+Orfeu,M
+Mnemósine,F
+Musas (deusas da inspiração artística),F
+Horas (deusas das estações do ano),F
+Moiras (deusas/irmãs do destino),F
+Afrodite,F
+Dione,F
+Témis,F
+Leda (rainha de Esparta),F
+Dióscuros,M
+Helena,F
+Dionísio,M
+Sêmele,F
+Pluto,M
+Tântalo (rei da Frígia),M
+Eurínome,F
+Eufrosina,F
+Tália,F
+Aglaia,F
+Alcmena (mortal),F
+Hércules,M
+Maia,F
+Hermes,M
+Europa,F
+Sarpedão (A Ilíada),M
+Minos (rei de Creta),M
+Radamanto (juiz dos mortos),M
+Perseu,M
+Dânae (mortal),F
+Clio,F
+Pã (sátiro),M
+Eurídice,F

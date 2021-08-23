@@ -22,6 +22,11 @@ class GrafoDirecionado {
 	} // AdicionarVertice
 
 
+	public void Adicionar(Vertice vertice) {
+		AdicionarVertice(vertice.Label());
+	} // Adicionar
+
+
 	public void AdicionarVertices(string[] labels) {
 		foreach (var label in labels)
 			AdicionarVertice(label);
@@ -41,10 +46,24 @@ class GrafoDirecionado {
 		AdicionarAresta(saida, entrada);
 	} // Conectar
 
-
 	private void _AdicionarAresta(string saida, string entrada) {
 		if (vertices.Quantidade() != 0)
 			arestas.Adicionar(vertices[saida], vertices[entrada]);
+	} // _AdicionarAresta
+
+
+	public void AdicionarAresta(string saida, string entrada, Familiar vinculo) {
+		if ( VerticesExistem(saida, entrada) )
+			_AdicionarAresta(saida, entrada, vinculo);
+	} // AdicionarAresta
+
+	public void Conectar(string saida, string entrada, Familiar vinculo) {
+		AdicionarAresta(saida, entrada, vinculo);
+	} // Conectar
+
+	private void _AdicionarAresta(string saida, string entrada, Familiar vinculo) {
+		if (vertices.Quantidade() != 0)
+			arestas.Adicionar(vertices[saida], vertices[entrada], vinculo);
 	} // _AdicionarAresta
 
 
