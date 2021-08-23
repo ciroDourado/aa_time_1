@@ -8,13 +8,14 @@
 <div class="text-center" id="containerPrincipal">
     <h1 class="display-4">Atividade 2</h1>
     <h3><strong>Hashing</strong></h3>
-    <p>Com um conjunto de imagens 4K em um diretório, esse trabalho consistiu em buscar a última imagem desse conjunto,
+    
+    <div align='justify'><p>Com um conjunto de imagens 4K em um diretório, esse trabalho consistiu em buscar a última imagem desse conjunto,
         através de uma Tabela Hash em dois cenários: utilizando a função de hash do Quadrado Médio e a função de hash MD5. Além disso, foi feita uma Busca Binária para fins de comparação.
 
         <p>Em todos os casos, a eficiência de cada algoritmos foi testada e os resultados comparativos foram ilustrados graficamente utilizando <a href="https://www.chartjs.org/" target="_blank" rel="nonfollow">Chart.js</a></p>
 
     </p>
-
+    </div>
     <section id="mainAnalise">
 
         <div id="wrapperCanvasTempoHash" class="chart-wrapper">
@@ -24,7 +25,8 @@
             <canvas id="chartTempoHash"></canvas>
         </div>
         <strong><h2>Análise dos Resultados:</h2></strong>
-        <p class='descricao'>Ao observar a linha traçada pelo gráfico da Busca Linear, observa-se que, à medida que o número de entradas
+        <div class='relatorios' align='justify'>
+        <p>Ao observar a linha traçada pelo gráfico da Busca Linear, observa-se que, à medida que o número de entradas
             aumenta, o tempo de busca cresce proporcionalmente. Isso acontece pelo fato de que o algoritmo compara o elemento procurado com
             cada elemento do vetor até encontra-lo. No caso do trabalho, encontra-se na última posição. Observa-se que, com um número pequeno de
             entradas, a Busca Linear é mais eficiente que o Hash SQM. Porém, é bem menos eficiente comparado aos métodos de Hashing quando
@@ -32,7 +34,7 @@
             de entradas, quanto com um número mais elevado.
         </p>
 
-        <p class='descricao'>Comparando os gráficos das funções de Hash MD5 e SQM observa-se picos maiores de tempo no gráfico SQM.
+        <p>Comparando os gráficos das funções de Hash MD5 e SQM observa-se picos maiores de tempo no gráfico SQM.
             Seu maior tempo registado foi de 1.326.000 milisegundos. Enquanto no gráfico da função MD5 o maior tempo medido foi de 606.634
             milisegundos. Em relação à oscilação dos gráficos, as funções apresentam variações entre tempos baixos
             e tempos muito altos com números de entradas próximos uns aos outros. Isso pode ser explicado pelo acontecimento de colisões em ambos
@@ -40,6 +42,7 @@
             para efetuar a busca.
 
         </p>
+        </div>
     </section>
 </div>
 
