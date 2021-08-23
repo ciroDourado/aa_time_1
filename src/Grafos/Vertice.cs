@@ -25,6 +25,14 @@ class Vertice {
         return sexo;
     } // get
 
+    public bool EhHomem() {
+        return string.Equals(sexo, "M");
+    } // EhHomem
+
+    public bool EhMulher() {
+        return string.Equals(sexo, "F");
+    } // EhMulher
+
     public bool EhIgual(string label) {
         return label.Equals(this.label);
     } // EhIgual

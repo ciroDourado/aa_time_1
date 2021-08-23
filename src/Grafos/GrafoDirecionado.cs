@@ -143,14 +143,14 @@ class GrafoDirecionado {
 	} // ProcurarVizinhos
 
 
-	public string VerticesEmJson() {
-		return vertices.ToJson();
-	} // VerticesEmJson
-
-
-	public string ArestasEmJson() {
-		return arestas.ToJson();
-	} // ArestasEmJson
+	// public string VerticesEmJson() {
+	// 	return vertices.ToJson();
+	// } // VerticesEmJson
+	//
+	//
+	// public string ArestasEmJson() {
+	// 	return arestas.ToJson();
+	// } // ArestasEmJson
 
 } // class GrafoDirecionado
 } // namespace Grafos
