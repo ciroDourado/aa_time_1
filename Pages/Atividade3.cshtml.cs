@@ -71,6 +71,7 @@ public class Atividade3Model: PageModel {
         Console.WriteLine(json);
     } // OnGet
 
+
 	public string GrafoEmJson() {
 		var linhas = new List<string>();
 
@@ -81,36 +82,55 @@ public class Atividade3Model: PageModel {
 		return $"[\n{string.Join(",\n", linhas)}\n]";
 	} // GrafoEmJson
 
+
 	private string LinhaJson(int key, Vertice vertice) {
 		var linha = new List<string>();
 
-		linha.Add($"key: {key}");
-		linha.Add($"n: \"{vertice.Label()}\"");
+        AdicionarKey(linha, key);
+        AdicionarNome(linha, vertice.Label());
+        AdicionarConjuges(linha, key);
+        AdicionarPais(linha, key);
 
-		if (vertice.EhMulher()) {
-			var vinculo = Familiar.Conjugalidade;
-			var marido  = genealogia.ArestasQueChegamEm(key, vinculo);
-			if (marido.Count != 0)
-				linha.Add($"vir: {marido[0]}");
-		}
-
-		var pais = genealogia.ArestasQueChegamEm(
-			key,
-			Familiar.Hereditariedade
-		); // QueChegamEm
-
-		if (pais.Count > 1) {
-			if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
-				linha.Add($"f: {pais[0]}, m: {pais[1]}");
-			else linha.Add($"f: {pais[1]}, m: {pais[0]}");
-		}
-		else if (pais.Count == 1) {
-			if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
-				linha.Add($"f: {pais[0]}");
-			else linha.Add($"m: {pais[0]}");
-		}
 		return $"\t{{{string.Join(", ", linha)}}}";
 	} // LinhaJson
+
+
+    private void AdicionarKey(List<string> linha, int key) {
+        linha.Add($"key: {key}");
+    } // AdicionarKey
+
+
+    private void AdicionarNome(List<string> linha, string n) {
+        linha.Add($"n: \"{n}\"");
+    } // AdicionarNome
+
+
+    private void AdicionarConjuges(List<string> linha, int key) {
+        if (genealogia.VerticeNoIndice(key).EhMulher()) {
+            var vinculo = Familiar.Conjugalidade;
+            var marido  = genealogia.ArestasQueChegamEm(key, vinculo);
+            if (marido.Count != 0)
+                linha.Add($"vir: {marido[0]}");
+        }
+    } // AdicionarConjuges
+
+
+    private void AdicionarPais(List<string> linha, int key) {
+        var pais = genealogia.ArestasQueChegamEm(
+            key,
+            Familiar.Hereditariedade
+        );
+        if (pais.Count > 1) {
+            if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
+                linha.Add($"f: {pais[0]}, m: {pais[1]}");
+            else linha.Add($"f: {pais[1]}, m: {pais[0]}");
+        }
+        else if (pais.Count == 1) {
+            if (genealogia.VerticeNoIndice(pais[0]).EhHomem())
+                linha.Add($"f: {pais[0]}");
+            else linha.Add($"m: {pais[0]}");
+        }
+    } // AdicionarPais
 
 } // public class Atividade3Model: PageModel
 } // namespace aa_time_1.Pages
