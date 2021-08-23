@@ -10,6 +10,7 @@ class Vertice {
 
     public Vertice(string label) {
         this.label = label;
+        this.sexo  = string.Empty;
     } // new(args)
 
     public Vertice(string label, string sexo) {
@@ -26,11 +27,11 @@ class Vertice {
     } // get
 
     public bool EhHomem() {
-        return string.Equals(sexo, "M");
+        return sexo.Equals("M");
     } // EhHomem
 
     public bool EhMulher() {
-        return string.Equals(sexo, "F");
+        return sexo.Equals("F");
     } // EhMulher
 
     public bool EhIgual(string label) {
@@ -38,7 +39,7 @@ class Vertice {
     } // EhIgual
 
     public override string ToString() {
-        return $"{label}";
+        return $"{label}, {sexo}";
     } // ToString
 } // class Vertice
 } // namespace Grafos

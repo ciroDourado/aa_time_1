@@ -15,14 +15,12 @@ namespace aa_time_1.Pages {
 public class Atividade3Model: PageModel {
     private readonly ILogger<Atividade3Model> _logger;
     private GrafoDirecionado genealogia;
-    public string VerticesJson { get; set; }
-    public string ArestasJson  { get; set; }
+    public  string           json { get; set; }
 
     public Atividade3Model(ILogger<Atividade3Model> logger) {
-        _logger      = logger;
-        ArestasJson  = string.Empty;
-        VerticesJson = string.Empty;
-        genealogia   = new GrafoDirecionado();
+        _logger    = logger;
+        json       = string.Empty;
+        genealogia = new GrafoDirecionado();
 
         AdicionarDeuses(genealogia);
         AdicionarRelacoesHereditarias(genealogia);
@@ -69,9 +67,7 @@ public class Atividade3Model: PageModel {
     } // AdicionarRelacoesConjugais
 
     public void OnGet() {
-        genealogia.ExibirArestas();
-        // VerticesJson = genealogia.VerticesEmJson();
-        // ArestasJson  = genealogia.ArestasEmJson();
+        json = genealogia.EmJson();
     }
 } // public class Atividade3Model: PageModel
 } // namespace aa_time_1.Pages

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 
 namespace Grafos {
@@ -23,8 +24,20 @@ class GrafoDirecionado {
 
 
 	public void Adicionar(Vertice vertice) {
-		AdicionarVertice(vertice.Label());
+		AdicionarVertice(vertice);
 	} // Adicionar
+
+	public void AdicionarVertice(Vertice vertice) {
+		var label = vertice.Label();
+
+		if ( vertices.Existe(label) ) {
+			string erro = "Já existe um vértice";
+			Console.WriteLine($"{erro} {label}");
+		} else {
+			vertices.Adicionar(vertice);
+			arestas.AdicionarAdjacencias(1);
+		}
+	} // AdicionarVertice
 
 
 	public void AdicionarVertices(string[] labels) {
@@ -143,14 +156,46 @@ class GrafoDirecionado {
 	} // ProcurarVizinhos
 
 
-	// public string VerticesEmJson() {
-	// 	return vertices.ToJson();
-	// } // VerticesEmJson
-	//
-	//
-	// public string ArestasEmJson() {
-	// 	return arestas.ToJson();
-	// } // ArestasEmJson
+	public string EmJson() {
+		var linhas = new List<string>();
+
+		foreach (var dupla in vertices.Enumerar()) {
+			var linha = LinhaJson(dupla.index, dupla.vertice);
+			linhas.Add(linha);
+		}
+		return $"[\n{string.Join(",\n", linhas)}\n]";
+	} // EmJson
+
+	private string LinhaJson(int key, Vertice vertice) {
+		var linha = new List<string>();
+
+		linha.Add($"key: {key}");
+		linha.Add($"n: \"{vertice.Label()}\"");
+
+		if (vertice.EhMulher()) {
+			var vinculo = Familiar.Conjugalidade;
+			var marido  = arestas.QueChegamEm(key, vinculo);
+			if (marido.Count != 0)
+				linha.Add($"vir: {marido[0]}");
+		}
+
+		var pais = arestas.QueChegamEm(
+			key,
+			Familiar.Hereditariedade
+		); // QueChegamEm
+
+		if (pais.Count > 1) {
+			if (vertices.NoIndice(pais[0]).EhHomem())
+				linha.Add($"f: {pais[0]}, m: {pais[1]}");
+			else linha.Add($"f: {pais[1]}, m: {pais[0]}");
+		}
+		else if (pais.Count == 1) {
+			if (vertices.NoIndice(pais[0]).EhHomem())
+				linha.Add($"f: {pais[0]}");
+			else linha.Add($"m: {pais[0]}");
+		}
+		return $"\t{{{string.Join(", ", linha)}}}";
+	} // LinhaJson
 
 } // class GrafoDirecionado
 } // namespace Grafos
