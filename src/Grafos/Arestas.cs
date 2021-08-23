@@ -90,6 +90,22 @@ class Arestas {
 	} // QuePartemDe
 
 
+	public List<int> QueChegamEm(int verticeDeEntrada) {
+		return adjacencias.FiltrarColuna(
+			verticeDeEntrada,
+			Familiar.Hereditariedade
+		); // FiltrarColuna
+	} // QueChegamEm
+
+
+	public List<int> QueChegamEm(int verticeDeEntrada, Familiar vinculo) {
+		return adjacencias.FiltrarColuna(
+			verticeDeEntrada,
+			vinculo
+		); // FiltrarColuna
+	} // QueChegamEm
+
+
     public string ToJson() {
         // var linhas = new List<string>();
 		//
