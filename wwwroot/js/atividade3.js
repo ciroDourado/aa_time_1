@@ -6,6 +6,9 @@ const dados = JSON.parse(
     })
 );
 
+// O código abaixo foi feito baseado na documentação da lib GoJS para plotagem de grafos
+// Referência do exemplo usado como base: https://gojs.net/latest/samples/genogram.html
+
 
 // Funções de configuração do grafo segundo documentação da lib
 
