@@ -232,3 +232,16 @@ GenogramLayout.prototype.add = function(net, coll, nonmemberonly) {
     multiSpousePeople.removeAll(cohort);
   }
 };
+
+// collect all of the people indirectly married with a person
+GenogramLayout.prototype.extendCohort = function(coll, node) {
+  if (coll.has(node)) return;
+  coll.add(node);
+  var lay = this;
+  node.linksConnected.each(function(l) {
+    if (l.isLabeledLink) {  // if it's a marriage link, continue with both spouses
+      lay.extendCohort(coll, l.fromNode);
+      lay.extendCohort(coll, l.toNode);
+    }
+  });
+};
