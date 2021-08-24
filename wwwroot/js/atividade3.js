@@ -339,3 +339,12 @@ GenogramLayout.prototype.commitNodes = function() {
     }
   });
 };
+
+GenogramLayout.prototype.findParentsMarriageLabelNode = function(node) {
+  var it = node.findNodesInto();
+  while (it.next()) {
+    var n = it.value;
+    if (n.isLinkLabel) return n;
+  }
+  return null;
+};
