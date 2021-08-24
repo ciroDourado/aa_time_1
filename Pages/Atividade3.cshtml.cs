@@ -70,7 +70,7 @@ public class Atividade3Model: PageModel {
 
     public void OnGet() {
         json   = GrafoEmJson();
-        Console.WriteLine(json);
+        // Console.WriteLine(json);
     } // OnGet
 
 
