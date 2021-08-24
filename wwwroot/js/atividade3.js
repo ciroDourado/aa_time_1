@@ -1,5 +1,9 @@
-vertices = JSON.parse(document.querySelector("span#verticesJson").innerText);
-arestas  = JSON.parse(document.querySelector("span#arestasJson").innerText);
+const dados = JSON.parse(
+  document.querySelector("span#vertices-json").innerText)
+    .map(vertice => ({
+      ...vertice,
+      s: "M"
+    })
+);
 
-console.log(vertices);
-console.log(arestas);
+console.log(dados);
