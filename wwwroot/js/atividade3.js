@@ -13,7 +13,7 @@ const dados = JSON.parse(
 function init() {
   var $ = go.GraphObject.make;
   myDiagram =
-    $(go.Diagram, "myDiagramDiv",
+    $(go.Diagram, "grafo",
       {
         initialAutoScale: go.Diagram.Uniform,
         "undoManager.isEnabled": true,
