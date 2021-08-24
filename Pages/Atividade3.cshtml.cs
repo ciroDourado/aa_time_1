@@ -22,11 +22,6 @@ public class Atividade3Model: PageModel {
     public Atividade3Model(ILogger<Atividade3Model> logger) {
         _logger    = logger;
         json       = string.Empty;
-        genealogia = new GrafoDirecionado();
-
-        AdicionarDeuses(genealogia);
-        AdicionarRelacoesHereditarias(genealogia);
-        AdicionarRelacoesConjugais(genealogia);
     } // new(args)
 
     private void AdicionarDeuses(GrafoDirecionado grafo) {
@@ -69,8 +64,13 @@ public class Atividade3Model: PageModel {
     } // AdicionarRelacoesConjugais
 
     public void OnGet() {
+        genealogia = new GrafoDirecionado();
+        AdicionarDeuses(genealogia);
+        AdicionarRelacoesHereditarias(genealogia);
+        AdicionarRelacoesConjugais(genealogia);
+        
         json   = GrafoEmJson();
-        // Console.WriteLine(json);
+        Console.WriteLine(json);
     } // OnGet
 
 
