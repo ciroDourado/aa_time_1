@@ -118,3 +118,25 @@ function setupParents(diagram) {
     }
   }
 }
+
+// A custom layout that shows the two families related to a person's parents
+function GenogramLayout() {
+  go.LayeredDigraphLayout.call(this);
+  this.initializeOption = go.LayeredDigraphLayout.InitDepthFirstIn;
+  this.spouseSpacing = 30;  // minimum space between spouses
+}
+go.Diagram.inherit(GenogramLayout, go.LayeredDigraphLayout);
+
+GenogramLayout.prototype.makeNetwork = function(coll) {
+  // generate LayoutEdges for each parent-child Link
+  var net = this.createNetwork();
+  if (coll instanceof go.Diagram) {
+    this.add(net, coll.nodes, true);
+    this.add(net, coll.links, true);
+  } else if (coll instanceof go.Group) {
+    this.add(net, coll.memberParts, false);
+  } else if (coll.iterator) {
+    this.add(net, coll.iterator, false);
+  }
+  return net;
+};
