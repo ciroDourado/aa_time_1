@@ -42,7 +42,7 @@ function init() {
           new go.Binding("image"))
       ),
       $(go.TextBlock,
-        { margin: 10, font: "32px Arial, sans-serif" ,textAlign: "center", maxSize: new go.Size(80, NaN) },
+        { margin: 10, font: "32px Arial, sans-serif" ,textAlign: "center", maxSize: new go.Size(200, NaN) },
         new go.Binding("text", "n"))
     ));
 
