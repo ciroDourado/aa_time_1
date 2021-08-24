@@ -140,3 +140,95 @@ GenogramLayout.prototype.makeNetwork = function(coll) {
   }
   return net;
 };
+
+// internal method for creating LayeredDigraphNetwork where husband/wife pairs are represented
+// by a single LayeredDigraphVertex corresponding to the label Node on the marriage Link
+GenogramLayout.prototype.add = function(net, coll, nonmemberonly) {
+  var multiSpousePeople = new go.Set();
+  // consider all Nodes in the given collection
+  var it = coll.iterator;
+  while (it.next()) {
+    var node = it.value;
+    if (!(node instanceof go.Node)) continue;
+    if (!node.isLayoutPositioned || !node.isVisible()) continue;
+    if (nonmemberonly && node.containingGroup !== null) continue;
+    // if it's an unmarried Node, or if it's a Link Label Node, create a LayoutVertex for it
+    if (node.isLinkLabel) {
+      // get marriage Link
+      var link = node.labeledLink;
+      var spouseA = link.fromNode;
+      var spouseB = link.toNode;
+      // create vertex representing both husband and wife
+      var vertex = net.addNode(node);
+      // now define the vertex size to be big enough to hold both spouses
+      vertex.width = spouseA.actualBounds.width + this.spouseSpacing + spouseB.actualBounds.width;
+      vertex.height = Math.max(spouseA.actualBounds.height, spouseB.actualBounds.height);
+      vertex.focus = new go.Point(spouseA.actualBounds.width + this.spouseSpacing / 2, vertex.height / 2);
+    } else {
+      // don't add a vertex for any married person!
+      // instead, code above adds label node for marriage link
+      // assume a marriage Link has a label Node
+      var marriages = 0;
+      node.linksConnected.each(function(l) { if (l.isLabeledLink) marriages++; });
+      if (marriages === 0) {
+        var vertex = net.addNode(node);
+      } else if (marriages > 1) {
+        multiSpousePeople.add(node);
+      }
+    }
+  }
+  // now do all Links
+  it.reset();
+  while (it.next()) {
+    var link = it.value;
+    if (!(link instanceof go.Link)) continue;
+    if (!link.isLayoutPositioned || !link.isVisible()) continue;
+    if (nonmemberonly && link.containingGroup !== null) continue;
+    // if it's a parent-child link, add a LayoutEdge for it
+    if (!link.isLabeledLink) {
+      var parent = net.findVertex(link.fromNode);  // should be a label node
+      var child = net.findVertex(link.toNode);
+      if (child !== null) {  // an unmarried child
+        net.linkVertexes(parent, child, link);
+      } else {  // a married child
+        link.toNode.linksConnected.each(function(l) {
+          if (!l.isLabeledLink) return;  // if it has no label node, it's a parent-child link
+          // found the Marriage Link, now get its label Node
+          var mlab = l.labelNodes.first();
+          // parent-child link should connect with the label node,
+          // so the LayoutEdge should connect with the LayoutVertex representing the label node
+          var mlabvert = net.findVertex(mlab);
+          if (mlabvert !== null) {
+            net.linkVertexes(parent, mlabvert, link);
+          }
+        });
+      }
+    }
+  }
+
+  while (multiSpousePeople.count > 0) {
+    // find all collections of people that are indirectly married to each other
+    var node = multiSpousePeople.first();
+    var cohort = new go.Set();
+    this.extendCohort(cohort, node);
+    // then encourage them all to be the same generation by connecting them all with a common vertex
+    var dummyvert = net.createVertex();
+    net.addVertex(dummyvert);
+    var marriages = new go.Set();
+    cohort.each(function(n) {
+      n.linksConnected.each(function(l) {
+        marriages.add(l);
+      })
+    });
+    marriages.each(function(link) {
+      // find the vertex for the marriage link (i.e. for the label node)
+      var mlab = link.labelNodes.first()
+      var v = net.findVertex(mlab);
+      if (v !== null) {
+        net.linkVertexes(dummyvert, v, null);
+      }
+    });
+    // done with these people, now see if there are any other multiple-married people
+    multiSpousePeople.removeAll(cohort);
+  }
+};
