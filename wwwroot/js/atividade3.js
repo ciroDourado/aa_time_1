@@ -9,6 +9,66 @@ const dados = JSON.parse(
 
 // Funções de configuração do grafo segundo documentação da lib
 
+function init() {
+  var $ = go.GraphObject.make;
+  myDiagram =
+    $(go.Diagram, "myDiagramDiv",
+      {
+        initialAutoScale: go.Diagram.Uniform,
+        "undoManager.isEnabled": true,
+        // when a node is selected, draw a big yellow circle behind it
+        nodeSelectionAdornmentTemplate:
+          $(go.Adornment, "Auto",
+            { layerName: "Grid" },  // the predefined layer that is behind everything else
+            $(go.Shape, "Circle", { fill: "#c1cee3", stroke: null }),
+            $(go.Placeholder, { margin: 2 })
+          ),
+        layout:  // use a custom layout, defined below
+          $(GenogramLayout, { direction: 90, layerSpacing: 300, columnSpacing: 50 })
+      });
+
+  // two different node templates, one for each sex,
+  // named by the category value in the node data object
+  myDiagram.nodeTemplateMap.add("M",  // male
+    $(go.Node, "Vertical",
+      { locationSpot: go.Spot.Center, locationObjectName: "ICON", selectionObjectName: "ICON" },
+      $(go.Panel,
+        { name: "ICON" },
+        // $(go.Shape, "Square",
+        //   { width: 40, height: 40, strokeWidth: 2, fill: "#90CAF9", stroke: "#919191", portId: "" }),
+        $(go.Picture,
+          { width: 100, height: 100, background: "#90CAF9" },
+          new go.Binding("image"))
+      ),
+      $(go.TextBlock,
+        { margin: 10, font: "32px Arial, sans-serif" ,textAlign: "center", maxSize: new go.Size(80, NaN) },
+        new go.Binding("text", "n"))
+    ));
+
+  // the representation of each label node -- nothing shows on a Marriage Link
+  myDiagram.nodeTemplateMap.add("LinkLabel",
+    $(go.Node, { selectable: false, width: 1, height: 1, fromEndSegmentLength: 20 }));
+
+
+  myDiagram.linkTemplate =  // for parent-child relationships
+    $(go.Link,
+      {
+        routing: go.Link.Orthogonal, corner: 5,
+        layerName: "Background", selectable: false,
+        fromSpot: go.Spot.Bottom, toSpot: go.Spot.Top
+      },
+      $(go.Shape, { stroke: "#424242", strokeWidth: 2 })
+    );
+
+  myDiagram.linkTemplateMap.add("Marriage",  // for marriage relationships
+    $(go.Link,
+      { selectable: false },
+      $(go.Shape, { strokeWidth: 2.5, stroke: "#5d8cc1" /* blue */ })
+    ));
+
+  setupDiagram(myDiagram, dados);
+}
+
 // create and initialize the Diagram.model given an array of node data representing people
 function setupDiagram(diagram, array, focusId) {
   diagram.model =
