@@ -274,3 +274,68 @@ GenogramLayout.prototype.assignLayers = function() {
   // from now on, the LayeredDigraphLayout will think that the Node is bigger than it really is
   // (other than the ones that are the widest or tallest in their respective layer).
 };
+
+GenogramLayout.prototype.commitNodes = function() {
+  go.LayeredDigraphLayout.prototype.commitNodes.call(this);
+  // position regular nodes
+  this.network.vertexes.each(function(v) {
+    if (v.node !== null && !v.node.isLinkLabel) {
+      v.node.position = new go.Point(v.x, v.y);
+    }
+  });
+  // position the spouses of each marriage vertex
+  var layout = this;
+  this.network.vertexes.each(function(v) {
+    if (v.node === null) return;
+    if (!v.node.isLinkLabel) return;
+    var labnode = v.node;
+    var lablink = labnode.labeledLink;
+    // In case the spouses are not actually moved, we need to have the marriage link
+    // position the label node, because LayoutVertex.commit() was called above on these vertexes.
+    // Alternatively we could override LayoutVetex.commit to be a no-op for label node vertexes.
+    lablink.invalidateRoute();
+    var spouseA = lablink.fromNode;
+    var spouseB = lablink.toNode;
+    // prefer fathers on the left, mothers on the right
+    if (spouseA.data.s === "F") {  // sex is female
+      var temp = spouseA;
+      spouseA = spouseB;
+      spouseB = temp;
+    }
+    // see if the parents are on the desired sides, to avoid a link crossing
+    var aParentsNode = layout.findParentsMarriageLabelNode(spouseA);
+    var bParentsNode = layout.findParentsMarriageLabelNode(spouseB);
+    if (aParentsNode !== null && bParentsNode !== null && aParentsNode.position.x > bParentsNode.position.x) {
+      // swap the spouses
+      var temp = spouseA;
+      spouseA = spouseB;
+      spouseB = temp;
+    }
+    spouseA.position = new go.Point(v.x, v.y);
+    spouseB.position = new go.Point(v.x + spouseA.actualBounds.width + layout.spouseSpacing, v.y);
+    if (spouseA.opacity === 0) {
+      var pos = new go.Point(v.centerX - spouseA.actualBounds.width / 2, v.y);
+      spouseA.position = pos;
+      spouseB.position = pos;
+    } else if (spouseB.opacity === 0) {
+      var pos = new go.Point(v.centerX - spouseB.actualBounds.width / 2, v.y);
+      spouseA.position = pos;
+      spouseB.position = pos;
+    }
+  });
+  // position only-child nodes to be under the marriage label node
+  this.network.vertexes.each(function(v) {
+    if (v.node === null || v.node.linksConnected.count > 1) return;
+    var mnode = layout.findParentsMarriageLabelNode(v.node);
+    if (mnode !== null && mnode.linksConnected.count === 1) {  // if only one child
+      var mvert = layout.network.findVertex(mnode);
+      var newbnds = v.node.actualBounds.copy();
+      newbnds.x = mvert.centerX - v.node.actualBounds.width / 2;
+      // see if there's any empty space at the horizontal mid-point in that layer
+      var overlaps = layout.diagram.findObjectsIn(newbnds, function(x) { return x.part; }, function(p) { return p !== v.node; }, true);
+      if (overlaps.count === 0) {
+        v.node.move(newbnds.position);
+      }
+    }
+  });
+};
