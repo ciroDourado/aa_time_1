@@ -245,3 +245,32 @@ GenogramLayout.prototype.extendCohort = function(coll, node) {
     }
   });
 };
+
+GenogramLayout.prototype.assignLayers = function() {
+  go.LayeredDigraphLayout.prototype.assignLayers.call(this);
+  var horiz = this.direction == 0.0 || this.direction == 180.0;
+  // for every vertex, record the maximum vertex width or height for the vertex's layer
+  var maxsizes = [];
+  this.network.vertexes.each(function(v) {
+    var lay = v.layer;
+    var max = maxsizes[lay];
+    if (max === undefined) max = 0;
+    var sz = (horiz ? v.width : v.height);
+    if (sz > max) maxsizes[lay] = sz;
+  });
+  // now make sure every vertex has the maximum width or height according to which layer it is in,
+  // and aligned on the left (if horizontal) or the top (if vertical)
+  this.network.vertexes.each(function(v) {
+    var lay = v.layer;
+    var max = maxsizes[lay];
+    if (horiz) {
+      v.focus = new go.Point(0, v.height / 2);
+      v.width = max;
+    } else {
+      v.focus = new go.Point(v.width / 2, 0);
+      v.height = max;
+    }
+  });
+  // from now on, the LayeredDigraphLayout will think that the Node is bigger than it really is
+  // (other than the ones that are the widest or tallest in their respective layer).
+};
