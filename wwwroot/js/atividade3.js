@@ -409,3 +409,6 @@ GenogramLayout.prototype.findParentsMarriageLabelNode = function(node) {
   }
   return null;
 };
+
+// Evento de renderização do grafo
+window.addEventListener('DOMContentLoaded', init);
