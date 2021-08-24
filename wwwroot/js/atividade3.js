@@ -9,6 +9,7 @@ const dados = JSON.parse(
 
 // Funções de configuração do grafo segundo documentação da lib
 
+// Função de inicialização segundo exemplo da lib
 function init() {
   var $ = go.GraphObject.make;
   myDiagram =
